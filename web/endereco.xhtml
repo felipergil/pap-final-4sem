@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <ui:composition template="/WEB-INF/template/template.xhtml">
+        <ui:define name="content">
+
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-md-4 col-md-offset-4">
+                        <h:form class="form-horizontal" role="form">
+                            <fieldset>
+
+                                <!-- Form Name -->
+                                <legend>Confirmar endereço</legend>
+
+                                <!-- Text input-->
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="textinput">Rua</label>
+                                    <div class="col-sm-10">
+                                        <h:inputText value="#{clienteBean.rua}" class="form-control"/>
+                                    </div>
+                                </div>
+
+                                <!-- Text input-->
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="textinput">Bairro</label>
+                                    <div class="col-sm-10">
+                                        <h:inputText value="#{clienteBean.bairro}" class="form-control"/>
+                                    </div>
+                                </div>
+
+                                <!-- Text input-->
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="textinput">Número</label>
+                                    <div class="col-sm-10">
+                                        <h:inputText value="#{clienteBean.numeroendereco}" class="form-control"/>
+                                    </div>
+                                </div>
+
+                                <!-- Text input-->
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="textinput">Cidade</label>
+                                    <div class="col-sm-10">
+                                        <h:inputText value="#{clienteBean.cidade}" class="form-control"/>
+                                    </div>
+                                </div>
+
+                                <!-- Text input-->
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="textinput">Estado</label>
+                                    <div class="col-sm-4">
+                                        <h:inputText value="#{clienteBean.estado}" class="form-control"/>
+                                    </div>
+
+                                    <label class="col-sm-2 control-label" for="textinput">CEP</label>
+                                    <div class="col-sm-4">
+                                        <h:inputText value="#{clienteBean.cep}" class="form-control"/>
+                                    </div>
+                                </div>
+
+
+
+
+
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <div class="pull-right">
+                                            <h:commandButton type="submit" class="btn btn-primary" value="Confirmar" action="#{clienteBean.atualizarCliente()}"></h:commandButton>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </fieldset>
+                        </h:form>
+                    </div><!-- /.col-lg-12 -->
+                </div><!-- /.row -->
+
+            </div>
+
+        </ui:define>
+    </ui:composition>
+
+</html>

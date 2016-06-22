@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head>
+        <meta charset="utf-8"></meta>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+        <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+        <meta name="description" content=""></meta>
+        <meta name="author" content=""></meta>
+        <link rel="icon" href="../../favicon.ico"></link>
+        <title>LowPriceCell</title>
+
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/css/bootstrap.min.css"></link>
+        <!-- Bootstrap theme -->
+        <h:outputStylesheet name="bootstrap-theme.min.css" library="css" />
+        <!-- Custom styles for this template -->
+        <link rel="stylesheet" type="text/css" 	 href="#{request.contextPath}/resources/theme.css"></link>
+        <h:outputStylesheet name="customfooter.css" library="css" />
+
+        <h:outputScript name="bootstrap.min.js" library="js" target="body"/>
+        <h:outputStylesheet name="demo.css" library="css" />
+        <h:outputStylesheet name="footer-distributed-with-address-and-phones.css" library="css" />
+        
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"/> 
+
+	<link href="http://fonts.googleapis.com/css?family=Cookie" rel="stylesheet" type="text/css"/>
+        
+
+        <script>
+            function formatar(mascara, documento) {
+                var i = documento.value.length;
+                var saida = mascara.substring(0, 1);
+                var texto = mascara.substring(i);
+
+                if (texto.substring(0, 1) != saida) {
+                    documento.value += texto.substring(0, 1);
+                }
+            }
+                        
+        </script>
+            
+        
+    </h:head>
+
+    <h:body>
+        <nav class="navbar navbar-default">
+                <div class="container-fluid">
+
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="index.xhtml">LowPriceCell</a>
+                    </div>
+
+
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a href="index.xhtml">Página Inicial <span class="sr-only">(current)</span></a></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Marcas <span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="celularesapple.xhtml">Apple</a></li>
+                                    <li><a href="celularessamsung.xhtml">Samsung</a></li>
+                                    <li><a href="celulareslg.xhtml">LG</a></li>
+                                    <li><a href="celularesmotorola.xhtml">Motorola</a></li>
+                                    <li><a href="celularesmicrosoft.xhtml">Microsoft</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Categoria <span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+
+                                    <li><a href="celularesentrada.xhtml">Entrada</a></li>
+                                    <li><a href="celularesintermediario.xhtml">Intermediário</a></li>
+                                    <li><a href="celulareshighend.xhtml">High end</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Sistema Operacional <span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+
+                                    <li><a href="celularesandroid.xhtml">Android</a></li>
+                                    <li><a href="celularesios.xhtml">IOS</a></li>
+                                    <li><a href="celulareswindows.xhtml">Windows Phone</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        
+                        
+                        <h:form>
+                        <ul class="nav navbar-nav navbar-right">
+
+                            
+                            <h:form rendered="#{clienteBean.verificarLogin() == null}">
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Logar/Cadastrar<span class="caret"></span></a>
+                                    <ul class="dropdown-menu" style="padding: 15px;min-width: 250px;">
+                                        <li>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <h:form class="form" id="login-nav">
+                                                        <div class="form-group">
+                                                            <label class="sr-only" for="exampleInputEmail2">Email</label>
+                                                            <h:inputText class="form-control" id="exampleInputEmail2" pt:placeholder="E-mail" value="#{clienteBean.email}"/>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="sr-only" for="exampleInputPassword2">Senha</label>
+                                                            <h:inputSecret class="form-control" id="exampleInputPassword2" value="#{clienteBean.senha}" pt:placeholder="Senha"/>
+                                                        </div>
+                                                        <div class="checkbox">
+                                                            <label>
+                                                                <input type="checkbox"></input> Lembrar senha
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <h:commandButton class="btn btn-success btn-block" value="Entrar" action="#{clienteBean.autentica}"/>
+                                                        </div>
+                                                    </h:form>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="divider"></li>
+                                        <li>
+                                            <h:outputLink class="btn btn-primary btn-block" type="button" id="sign-in-google" value="cadastrocliente.xhtml"><span class="ui-button-text" style="color:white">Cadastre-se </span></h:outputLink>
+
+                                        </li>
+                                    </ul>   
+
+                                </li>               
+                                </h:form>
+                            <h:form rendered="#{clienteBean.verificarLogin() != null}">
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">#{clienteBean.email} <span class="caret"></span></a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="#">Minha conta</a></li>
+                                        <li><a href="#">Meus Pedidos</a></li>
+                                        <li class="divider"></li>
+                                        <li>
+                                            <li align="center"><h:commandButton action="#{clienteBean.registraSaida()}" value="Sair" class="btn btn-danger"></h:commandButton></li>
+
+                                        </li>            
+                                    </ul>
+
+                                </li>               
+                                </h:form>
+                        </ul>
+                            </h:form>
+                        
+
+                        
+                        <ul class="nav navbar-nav navbar-header">
+                            
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <span class="glyphicon glyphicon-shopping-cart"></span> <h:outputText id="cartSize" value="#{carrinhoBean.carrinhoTamanho} - iten(s)"/><span class="caret"></span></a>                             
+                                <ul class="dropdown-menu dropdown-cart" role="menu">                                  
+                                    <li>
+                                        <li><a class="text-center" href="carrinho.xhtml">Ver Carrinho</a></li>
+                                    </li>                               
+                                    </ul>
+                            </li> 
+                            
+                        </ul>
+                        
+                    </div><!-- /.navbar-collapse -->
+                </div><!-- /.container-fluid -->
+            </nav>
+
+            <div class="jumbotron">
+                <div class="container">
+                    <h:form id="cadastro" >
+                    <h2 class="well">Cadastro de Produtos</h2>
+                    <div class="col-lg-12 well">
+                        
+                            
+                            
+                            <div class="col-sm-12">
+                                <div class="row">
+                                    <div class="col-sm-4 form-group">
+                                        <h:outputLabel value="Nome" for="nome"/> 
+                                        <h:inputText id="nome" value="#{produtoBean.titulo}" pt:placeholder="Digite o nome do produto" required="true" requiredMessage="Campo Nome deve ser preenchido" class="form-control"/>
+                                        <h:message for="nome" style="color:red"/>
+                                    </div>
+                                    <div class="col-sm-4 form-group">
+                                        <h:outputLabel value="Mini Descrição" for="minidescricao"/> 
+                                        <h:inputText id="minidescricao" value="#{produtoBean.miniDescricao}" pt:placeholder="(Exibida ao pesquisar produto)" class="form-control"  required="true" requiredMessage="Campo Mini Descrição deve ser preenchido" validatorMessage="CPF Inválido">
+                            
+                                        </h:inputText>
+                                        <h:message for="minidescricao" style="color:red"/>
+                                    </div>
+                                    <div class="col-sm-4 form-group">
+                                        <label>Valor</label>
+                                        <h:inputText id="valor" value="#{produtoBean.valor}" pt:placeholder="Ex: 1000.00" class="form-control"  required="true" requiredMessage="Campo Valor deve ser preenchido" validatorMessage="Data Inválida">
+                 
+                                        </h:inputText>                    
+                                        <h:message for="valor" style="color:red"/>
+                                    </div>
+                                </div>	
+                                </div>
+
+                                <div class="col-sm-12">
+                                <div class="row">
+                                    <div class="col-sm-4 form-group">
+                                        <h:outputLabel value="Marca" for="marca"/> 
+                                        <h:inputText id="marca" value="#{produtoBean.marca}" pt:placeholder="Digite a marca do produto" required="true" requiredMessage="Campo Marca deve ser preenchido" class="form-control"/>
+                                        <h:message for="marca" style="color:red"/>
+                                    </div>
+                                    <div class="col-sm-4 form-group">
+                                        <h:outputLabel value="Cor" for="cor"/> 
+                                        <h:inputText id="cor" value="#{produtoBean.cor}" pt:placeholder="Cor do produto" class="form-control"  required="true" requiredMessage="Campo Cor deve ser preenchido">
+                            
+                                        </h:inputText>
+                                        <h:message for="cor" style="color:red"/>
+                                    </div>
+                                    <div class="col-sm-4 form-group">
+                                        <label>Tipo de Chip</label>
+                                        <h:inputText id="chip" value="#{produtoBean.chip}" pt:placeholder="Ex: Micro Chip" class="form-control"  required="true">
+                 
+                                        </h:inputText>                    
+                                        <h:message for="chip" style="color:red"/>
+                                    </div>
+                                </div>
+                                    </div>
+                                    
+                                    <div class="col-sm-12"></div>
+                                <div class="row">
+                                    <div class="col-sm-4 form-group">
+                                        <h:outputLabel value="Memoria Interna" for="memoria"/> 
+                                        <h:inputText id="memoria" value="#{produtoBean.memoria}" pt:placeholder="Ex: 1GB" required="true" requiredMessage="Campo Memória Interna deve ser preenchido" class="form-control"/>
+                                        <h:message for="memoria" style="color:red"/>
+                                    </div>
+                                    <div class="col-sm-4 form-group">
+                                        <h:outputLabel value="Processador" for="processador"/> 
+                                        <h:inputText id="processador" value="#{produtoBean.processador}" pt:placeholder="Digite o processador" class="form-control"  required="true" requiredMessage="Campo Processador deve ser preenchido">
+                            
+                                        </h:inputText>
+                                        <h:message for="processador" style="color:red"/>
+                                    </div>
+                                    <div class="col-sm-4 form-group">
+                                        <label>Sistema operacional</label>
+                                        <h:inputText id="sistema" value="#{produtoBean.sistema}" pt:placeholder="Ex: Android" class="form-control"  required="true" requiredMessage="Campo Sistema Operacional deve ser preenchido" >
+                 
+                                        </h:inputText>                    
+                                        <h:message for="sistema" style="color:red"/>
+                                    </div>
+                                </div>
+                                    </div>
+                                    
+                                <div class="col-sm-12">
+                                <div class="row">
+                                    <div class="col-sm-4 form-group">
+                                        <h:outputLabel value="Tamanho do Display" for="display"/> 
+                                        <h:inputText id="display" value="#{produtoBean.display}" pt:placeholder="Ex: 4.5" required="true" requiredMessage="Campo Tamanho do Display deve ser preenchido" class="form-control"/>
+                                        <h:message for="display" style="color:red"/>
+                                    </div>
+                                    <div class="col-sm-4 form-group">
+                                        <h:outputLabel value="Câmera Traseira" for="camerat"/> 
+                                        <h:inputText id="camerat" value="#{produtoBean.cameraTraseira}" pt:placeholder="Ex: 12 mp" class="form-control"  required="true" requiredMessage="Campo Câmera traseira deve ser preenchido">
+                            
+                                        </h:inputText>
+                                        <h:message for="camerat" style="color:red"/>
+                                    </div>
+                                    <div class="col-sm-4 form-group">
+                                        <label>Camera Frontal</label>
+                                        <h:inputText id="cameraf" value="#{produtoBean.cameraFrontal}" pt:placeholder="Ex: 12mp" class="form-control" required="true" requiredMessage="Campo Câmera Frontal deve ser preenchido">
+                 
+                                        </h:inputText>                    
+                                        <h:message for="cameraf" style="color:red"/>
+                                    </div>
+                                </div>
+                                    </div>
+                                    
+                                    
+                                <div class="col-sm-12">
+                                <div class="row">
+                                    <div class="col-sm-4 form-group">
+                                        <h:outputLabel value="Filmadora" for="filmadora"/> 
+                                        <h:inputText id="filmadora" value="#{produtoBean.filmadora}" pt:placeholder="Ex: 12mp" required="true" requiredMessage="Campo Filmadora deve ser preenchido" class="form-control"/>
+                                        <h:message for="filmadora" style="color:red"/>
+                                    </div>
+                                    <div class="col-sm-4 form-group">
+                                        <h:outputLabel value="Memoria expansiva" for="memoriae"/> 
+                                        <h:inputText id="memoriae" value="#{produtoBean.memoriaExpansiva}" pt:placeholder="Ex: Até 200GB" class="form-control"  required="true" requiredMessage="Campo Memoria Expansiva deve ser preenchido">
+                            
+                                        </h:inputText>
+                                        <h:message for="memoriae" style="color:red"/>
+                                    </div>
+                                    <div class="col-sm-4 form-group">
+                                        <label>Tipo de bateria</label>
+                                        <h:inputText id="bateria" value="#{produtoBean.tipoBateria}" pt:placeholder="Ex: Ions de Lítio 2550 mAh" class="form-control"  required="true" requiredMessage="Campo Bateria deve ser preenchido">
+                 
+                                        </h:inputText>                    
+                                        <h:message for="bateria" style="color:red"/>
+                                    </div>
+                                </div>
+                                    </div>
+                    
+                                <div class="col-sm-12">
+                                <div class="row">
+                                    <div class="col-sm-4 form-group">
+                                        <h:outputLabel value="Conectividade" for="conectividade"/> 
+                                        <h:inputText id="conectividade" value="#{produtoBean.conectividade}" pt:placeholder="Ex: 4G, Wi-fi" required="true" requiredMessage="Campo Conectividade deve ser preenchido" class="form-control"/>
+                                        <h:message for="conectividade" style="color:red"/>
+                                    </div>
+                                    <div class="col-sm-4 form-group">
+                                        <h:outputLabel value="NFC" for="nfc"/> 
+                                        <h:inputText id="nfc" value="#{produtoBean.nfc}" pt:placeholder="Ex: Não" class="form-control"  required="true" requiredMessage="Campo NFC deve ser preenchido" >
+                            
+                                        </h:inputText>
+                                        <h:message for="nfc" style="color:red"/>
+                                    </div>
+                                    <div class="col-sm-4 form-group">
+                                        <label>Categoria</label>
+                                        <h:inputText id="categoria" value="#{produtoBean.categoria}" pt:placeholder="Ex: Intermediário" class="form-control"  required="true" requiredMessage="Campo Categoria deve ser preenchido">
+                 
+                                        </h:inputText>                    
+                                        <h:message for="categoria" style="color:red"/>
+                                    </div>
+                                </div>
+                                </div>
+                    
+                                <div class="col-sm-12">
+                                <div class="row">
+                                    <div class="col-sm-4 form-group">
+                                        <h:outputLabel value="Imagem detalhe 3(Página do Produto)" for="img3"/> 
+                                        <h:inputText id="img3" value="#{produtoBean.imagemDetalhesTres}" pt:placeholder="Insira a URL" required="true" requiredMessage="Campo Imagem Detalhe 3 deve ser preenchido" class="form-control"/>
+                                        <h:message for="img3" style="color:red"/>
+                                    </div>
+                                    <div class="col-sm-4 form-group">
+                                        <h:outputLabel value="Descrição" for="desc"/> 
+                                        <h:inputText id="desc" value="#{produtoBean.descricao}" pt:placeholder="Insira a descrição completa" class="form-control"  required="true" requiredMessage="Campo Descrição deve ser preenchido">
+                            
+                                        </h:inputText>
+                                        <h:message for="desc" style="color:red"/>
+                                    </div>
+                                    <div class="col-sm-4 form-group">
+                                        <label>TV</label>
+                                        <h:inputText id="tv" value="#{produtoBean.tv}" pt:placeholder="Ex: Sim" class="form-control"  required="true" requiredMessage="Campo TV deve ser preenchido">
+                 
+                                        </h:inputText>                    
+                                        <h:message for="tv" style="color:red"/>
+                                    </div>
+                                </div>
+                                </div>
+                    
+                                <div class="col-sm-12">
+                                <div class="row">
+                                    <div class="col-sm-4 form-group">
+                                        <h:outputLabel value="Conteúdo Embalagem" for="embalagem"/> 
+                                        <h:inputText id="embalagem" value="#{produtoBean.conteudoEmbalagem}" pt:placeholder="Ex: Fone, carregador" required="true" requiredMessage="Campo Conteúdo Embalagem deve ser preenchido" class="form-control"/>
+                                        <h:message for="embalagem" style="color:red"/>
+                                    </div>
+                                    <div class="col-sm-4 form-group">
+                                        <h:outputLabel value="Dimensões" for="dimensoes"/> 
+                                        <h:inputText id="dimensoes" value="#{produtoBean.dimensoes}" pt:placeholder="Dimensões do produto" class="form-control"  required="true" requiredMessage="Campo Dimensões deve ser preenchido">
+                            
+                                        </h:inputText>
+                                        <h:message for="dimensoes" style="color:red"/>
+                                    </div>
+                                    <div class="col-sm-4 form-group">
+                                        <label>Peso</label>
+                                        <h:inputText id="peso" value="#{produtoBean.peso}" pt:placeholder="Peso do produto sem embalagem" class="form-control"  required="true" requiredMessage="Campo Peso deve ser preenchido">
+                 
+                                        </h:inputText>                    
+                                        <h:message for="peso" style="color:red"/>
+                                    </div>
+                                </div>
+                                </div>
+                    
+                                <div class="col-sm-12">
+                                <div class="row">
+                                    <div class="col-sm-4 form-group">
+                                        <h:outputLabel value="Garantia" for="garantia"/> 
+                                        <h:inputText id="garantia" value="#{produtoBean.garantia}" pt:placeholder="Digite o prazo de garantia" required="true" requiredMessage="Campo Garantia deve ser preenchido" class="form-control"/>
+                                        <h:message for="garantia" style="color:red"/>
+                                    </div>
+                                    <div class="col-sm-4 form-group">
+                                        <h:outputLabel value="Referência do modelo" for="referencia"/> 
+                                        <h:inputText id="referencia" value="#{produtoBean.referenciaModelo}" pt:placeholder="Nome de fábrica" class="form-control"  required="true" requiredMessage="Campo Referência do Modelo deve ser preenchido" >
+                            
+                                        </h:inputText>
+                                        <h:message for="referencia" style="color:red"/>
+                                    </div>
+                                    <div class="col-sm-4 form-group">
+                                        <label>Fornecedor</label>
+                                        <h:inputText id="fornecedor" value="#{produtoBean.fornecedor}" pt:placeholder="Digite o fornecedor" class="form-control"  required="true" requiredMessage="Campo Fornecedor deve ser preenchido" >
+                 
+                                        </h:inputText>                    
+                                        <h:message for="fornecedor" style="color:red"/>
+                                    </div>
+                                </div>
+                                </div>
+                    
+                                <div class="col-sm-12">
+                                <div class="row">
+                                    <div class="col-sm-4 form-group">
+                                        <h:outputLabel value="SAC" for="sac"/> 
+                                        <h:inputText id="sac" value="#{produtoBean.sac}" pt:placeholder="Digite o SAC do fornecedor" required="true" requiredMessage="Campo SAC deve ser preenchido" class="form-control"/>
+                                        <h:message for="sac" style="color:red"/>
+                                    </div>
+                                    <div class="col-sm-4 form-group">
+                                        <h:outputLabel value="Imagem inicial(Lista de produtos)" for="imageminicial"/> 
+                                        <h:inputText id="imageminicial" value="#{produtoBean.imagemInicial}" pt:placeholder="Insira a URL" class="form-control"  required="true" requiredMessage="Campo Imagem Inicial deve ser preenchido">
+                            
+                                        </h:inputText>
+                                        <h:message for="imageminicial" style="color:red"/>
+                                    </div>
+                                    <div class="col-sm-4 form-group">
+                                        <label>Imagem Detalhe 1(Página do Produto)</label>
+                                        <h:inputText id="img1" value="#{produtoBean.imagemDetalheUm}" pt:placeholder="Insira a URL" class="form-control"  required="true" requiredMessage="Campo Imagem Detalhe 1 deve ser preenchido">
+                 
+                                        </h:inputText>                    
+                                        <h:message for="img1" style="color:red"/>
+                                    </div>
+                                </div>    
+                                    </div>
+                    
+                    <div class="col-sm-12">
+                                <div class="row">
+                                    <div class="col-sm-4 form-group">
+                                        <h:outputLabel value="Simbolo" for="simbolo"/> 
+                                        <h:inputText id="simbolo" value="#{produtoBean.simbolo}" pt:placeholder="Insira uma sequência de 5 letras" required="true" requiredMessage="Campo Simbolo deve ser preenchido" class="form-control"/>
+                                        <h:message for="simbolo" style="color:red"/>
+                                    </div>
+                                    <div class="col-sm-4 form-group">
+                                        <h:outputLabel value="Memória RAM" for="ram"/> 
+                                        <h:inputText id="ram" value="#{produtoBean.ram}" pt:placeholder="EX: 1 GB" class="form-control"  required="true" requiredMessage="Campo Memória RAM deve ser preenchido">
+                            
+                                        </h:inputText>
+                                        <h:message for="ram" style="color:red"/>
+                                    </div>
+                                    <div class="col-sm-4 form-group">
+                                        <label>Resolução da Tela</label>
+                                        <h:inputText id="res" value="#{produtoBean.resolucao}" pt:placeholder="Insira a resolução do produto" class="form-control"  required="true" requiredMessage="Campo Imagem Resolução deve ser preenchido">
+                 
+                                        </h:inputText>                    
+                                        <h:message for="res" style="color:red"/>
+                                    </div>
+                                </div>    
+                                    </div>
+                    
+                    <div class="col-sm-12">
+                                <div class="row">
+                                    <div class="col-sm-4 form-group">
+                                        <h:outputLabel value="Quantidade de Chip" for="qtdchip"/> 
+                                        <h:inputText id="qtdchip" value="#{produtoBean.quantidadeChip}" pt:placeholder="Ex: Single Chip" required="true" requiredMessage="Campo Quantidade de Chip deve ser preenchido" class="form-control"/>
+                                        <h:message for="qtdchip" style="color:red"/>
+                                    </div>
+                                    <div class="col-sm-4 form-group">
+                                        <h:outputLabel value="Versão do Sistema" for="versao"/> 
+                                        <h:inputText id="versao" value="#{produtoBean.sistemaVersao}" pt:placeholder="Insira a versão do sistema operacional" class="form-control"  required="true" requiredMessage="Campo Versão do Sistema deve ser preenchido">
+                            
+                                        </h:inputText>
+                                        <h:message for="versao" style="color:red"/>
+                                    </div>
+                                    <div class="col-sm-4 form-group">
+                                        <label>Imagem Detalhe 2(Página do Produto)</label>
+                                        <h:inputText id="img2" value="#{produtoBean.imagemDetalhesDois}" pt:placeholder="Insira a URL" class="form-control"  required="true" requiredMessage="Campo Imagem Detalhe 2 deve ser preenchido">
+                 
+                                        </h:inputText>                    
+                                        <h:message for="img2" style="color:red"/>
+                                    </div>
+                                </div>    
+                                    </div>
+                    
+                    <div class="col-sm-12">
+                                <div class="row">
+                                    
+                                    <div class="col-sm-4 form-group">
+                                        <label>Tipo de tela</label>
+                                        <h:inputText id="tela" value="#{produtoBean.tipoTela}" pt:placeholder="Ex: capacitiva" class="form-control"  required="true" requiredMessage="Campo Tipo de Tela deve ser preenchido">
+                 
+                                        </h:inputText>                    
+                                        <h:message for="tela" style="color:red"/>
+                                    </div>
+                                    <div class="col-sm-4 form-group">
+                                        <label>Banda</label>
+                                        <h:inputText id="banda" value="#{produtoBean.banda}" pt:placeholder="Ex: QuadBand" class="form-control"  required="true" requiredMessage="Campo Banda deve ser preenchido">
+                 
+                                        </h:inputText>                    
+                                        <h:message for="banda" style="color:red"/>
+                                    </div>
+                                </div>    
+                                    
+
+
+                        <p align="right"><h:commandButton value="Cadastrar" action ="#{produtoBean.addProduto()}" class="btn btn-lg btn-info"/></p>				
+                            </div>
+
+                    </h:form>    
+                    </div>
+                     
+                </div>
+
+
+            
+               
+        
+        <footer class="footer-distributed">
+
+			<div class="footer-left">
+
+                            <img src="http://imagizer.imageshack.us/a/img922/645/Uc2rVK.png"/>
+
+				<p class="footer-links">
+                                    <a href="index.xhtml">Pagina Inicial</a>
+					·
+					<a href="sobre.xhtml">Sobre</a>
+					
+				</p>
+
+				<p class="footer-company-name">Low Price Cell  2016</p>
+			</div>
+
+			<div class="footer-center">
+
+				<div>
+					<i class="fa fa-map-marker"></i>
+					<p><span>R. Alfeu Taváres, 149</span> São Bernardo do Campo, São Paulo</p>
+				</div>
+
+				<div>
+					<i class="fa fa-phone"></i>
+					<p>(11) 4366-5000</p>
+				</div>
+
+				<div>
+					<i class="fa fa-envelope"></i>
+					<p><a href="mailto:support@company.com">lowpricecellsac@lowpricecell.com.br</a></p>
+				</div>
+
+			</div>
+
+			<div class="footer-right">
+
+				<p class="footer-company-about">
+					<span>Sobre a companhia</span>
+					LowPriceCell é um site especializado em vendas de celulares das maiores marcas existentes no mercado.
+				</p>
+
+				<div class="footer-icons">
+
+					<a href="#"><i class="fa fa-facebook"></i></a>
+					<a href="#"><i class="fa fa-twitter"></i></a>
+					<a href="#"><i class="fa fa-linkedin"></i></a>
+					<a href="#"><i class="fa fa-github"></i></a>
+
+				</div>
+
+			</div>
+
+		</footer>
+
+
+            <!-- Bootstrap core JavaScript
+            ================================================== -->
+            <!-- Placed at the end of the document so the pages load faster -->
+            <script
+            src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+            <script src="../../dist/js/bootstrap.min.js"></script>
+            <script src="../../assets/js/docs.min.js"></script>
+            <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+            <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+        
+    </h:body>
+</html>
+

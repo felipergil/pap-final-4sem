@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <ui:composition template="/WEB-INF/template/template.xhtml">
+        <ui:define name="content">
+
+            <div class="container-fluid" style="margin-bottom:15%">
+                <div class="content-wrapper">	
+
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <div class="row">
+
+                                <div class="col-md-9" style="height: 350px;">
+                                    <div style="position: absolute; width: 92%;">
+                                        <img class="product" id="item-display" src="#{produtoBean.produto.imagemDetalheUm}" alt=""
+                                             style=" position: relative;max-width:100%" />
+                                    </div>
+                                </div>
+                                <div class="col-md-3" style="margin-left: -28px;">
+                                    <a id="item-1" class="service1-item">
+                                        <img id="img-item-1" src="#{produtoBean.produto.imagemDetalheUm}" alt=""></img>
+                                    </a>
+                                    <a id="item-2" class="service1-item">
+                                        <img id="img-item-2" src="#{produtoBean.produto.imagemDetalheDois}" alt=""></img>
+                                    </a>
+                                    <a id="item-3" class="service1-item">
+                                        <img id="img-item-3" src="#{produtoBean.produto.imagemDetalheTres}" alt=""></img>
+                                    </a>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <h:form id='form'>
+                            <div class="col-md-5" style="">
+
+
+
+                                <div class="product-title">#{produtoBean.produto.titulo}</div>
+                                <div class="product-desc">#{produtoBean.produto.miniDescricao}</div>
+
+                                <hr>
+                                    <div class="product-price">R$ #{produtoBean.produto.valor}</div>
+                                    <div class="product-stock">Em estoque</div>
+                                </hr>
+
+                                <input type="hidden" name="query" value="#{produtoBean.query}"/>
+
+                                <div class="btn-group cart">
+
+                                    <h:commandButton value="Adicionar ao carrinho" type="button" class="btn btn-success" action="#{produtoBean.adicionarAoCarrinho()}">
+                                        <f:ajax execute="@form" render=":cartSize"/>
+                                    </h:commandButton>
+
+                                </div>
+
+
+
+                            </div>
+                        </h:form> 
+                    </div> 
+
+                    <div class="row">
+                        <div class="container-fluid">		
+                            <div class="col-md-12 product-info">
+                                <ul id="myTab" class="nav nav-tabs nav_tabs">
+
+                                    <li class="active"><a href="#service-one" data-toggle="tab">DESCRIÇÃO</a></li>
+                                    <li><a href="#service-two" data-toggle="tab">INFORMAÇÕES TÉCNICAS</a></li>
+
+
+                                </ul>
+                                <div id="myTabContent" class="tab-content">
+                                    <div class="tab-pane fade in active" id="service-one">
+
+                                        <section class="container product-info">
+                                            #{produtoBean.produto.descricao}
+                                        </section>
+
+                                    </div>
+                                    <div class="tab-pane fade" id="service-two">
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <table style="width:100%" >
+
+                                                    <tr>
+                                                        <td style="padding:4px">
+                                                            Modelo:
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="background-color: whitesmoke;">
+                                                        <td style="padding:4px">
+                                                            Cor:
+                                                        </td>
+                                                    </tr>                                                    <tr>
+                                                        <td style="padding:4px">
+                                                            Tipo de chip:
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="background-color: whitesmoke;">
+                                                        <td style="padding:4px">
+                                                            Quantidade de Chips:
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="padding:4px">
+                                                        <td style="padding:4px">
+                                                            Memória interna:
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="background-color: whitesmoke;">
+                                                        <td style="padding:4px">
+                                                            Memória RAM:
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="padding:4px">
+                                                        <td style="padding:4px">
+                                                            Processador:
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="background-color: whitesmoke;">
+                                                        <td style="padding:4px">
+                                                            Sistema Operacional:
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="padding:4px">
+                                                        <td style="padding:4px">
+                                                            Versão:
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="background-color: whitesmoke;">
+                                                        <td style="padding:4px">
+                                                            Tipo de Tela:
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="padding:4px">
+                                                        <td style="padding:4px">
+                                                            Tamanho do Display:
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="background-color: whitesmoke;">
+                                                        <td style="padding:4px">
+                                                            Resolução:
+                                                        </td>
+                                                    </tr>
+                                                    <tr >
+                                                        <td style="padding:4px">
+                                                            Câmera frontal:
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="background-color: whitesmoke;">
+                                                        <td style="padding:4px">
+                                                            Câmera traseira:
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="padding:4px">
+                                                        <td style="padding:4px">
+                                                            Filmadora:
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="background-color: whitesmoke;">
+                                                        <td style="padding:4px">
+                                                            Alimentação/Tipo de bateria:
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="padding:4px">
+                                                        <td style="padding:4px">
+                                                            Banda:
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="background-color: whitesmoke;">
+                                                        <td style="padding:4px">
+                                                            Conectividade:
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="padding:4px">
+                                                        <td style="padding:4px">
+                                                            NFC:
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="background-color: whitesmoke;">
+                                                        <td style="padding:4px">
+                                                            TV:
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="padding:4px">
+                                                        <td style="padding:4px">
+                                                            Conteúdo da embalagem:
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="background-color: whitesmoke;">
+                                                        <td style="padding:4px">
+                                                            Dimensões apróximadas - cm(AxLxP):
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="padding:4px">
+                                                        <td style="padding:4px">
+                                                            Peso líq. aproximado do produto (kg):
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="background-color: whitesmoke;">
+                                                        <td style="padding:4px">
+                                                            Garantia do Fornecedor:
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="padding:4px">
+                                                        <td style="padding:4px">
+                                                            Referência do modelo:
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="background-color: whitesmoke;">
+                                                        <td style="padding:4px">
+                                                            Fornecedor:
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="padding:4px">
+                                                        <td style="padding:4px">
+                                                            SAC:
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <table style="width:100%" >
+                                                    <tr style="padding:4px">
+                                                        <td style="padding:4px">
+                                                            #{produtoBean.produto.marca}
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr style="background-color: whitesmoke;">
+                                                        <td style="padding:4px">
+                                                            #{produtoBean.produto.cor}
+                                                        </td>
+                                                    </tr>                                                    <tr>
+                                                        <td style="padding:4px">
+                                                            #{produtoBean.produto.chip}
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="background-color: whitesmoke;">
+                                                        <td style="padding:4px">
+                                                            #{produtoBean.produto.quantidadeChip}
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="padding:4px">
+                                                        <td style="padding:4px">
+                                                            #{produtoBean.produto.memoria}
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="background-color: whitesmoke;">
+                                                        <td style="padding:4px">
+                                                            #{produtoBean.produto.ram}
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="padding:4px">
+                                                        <td style="padding:4px">
+                                                            #{produtoBean.produto.processador}
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="background-color: whitesmoke;">
+                                                        <td style="padding:4px">
+                                                            #{produtoBean.produto.sistema}
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="padding:4px">
+                                                        <td style="padding:4px">
+                                                            #{produtoBean.produto.sistemaVersao}
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="background-color: whitesmoke;">
+                                                        <td style="padding:4px">
+                                                            #{produtoBean.produto.tipoDeTela}
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="padding:4px">
+                                                        <td style="padding:4px">
+                                                            #{produtoBean.produto.display}
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="background-color: whitesmoke;">
+                                                        <td style="padding:4px">
+                                                            #{produtoBean.produto.resolucao}
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="padding:4px">
+                                                        <td style="padding:4px">
+                                                            #{produtoBean.produto.cameraFrontal}
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="background-color: whitesmoke;">
+                                                        <td style="padding:4px">
+                                                            #{produtoBean.produto.cameraTraseira}
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="padding:4px">
+                                                        <td style="padding:4px">
+                                                            #{produtoBean.produto.filmadora}
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="background-color: whitesmoke;">
+                                                        <td style="padding:4px">
+                                                            #{produtoBean.produto.tipoBateria}
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="padding:4px">
+                                                        <td style="padding:4px">
+                                                            #{produtoBean.produto.banda}
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="background-color: whitesmoke;">
+                                                        <td style="padding:4px">
+                                                            #{produtoBean.produto.conectividade}
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="padding:4px">
+                                                        <td style="padding:4px">
+                                                            #{produtoBean.produto.nfc}
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="background-color: whitesmoke;">
+                                                        <td style="padding:4px">
+                                                            #{produtoBean.produto.tv}
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="padding:4px">
+                                                        <td style="padding:4px">
+                                                            #{produtoBean.produto.conteudoEmbalagem}
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="background-color: whitesmoke;">
+                                                        <td style="padding:4px">
+                                                            #{produtoBean.produto.dimensoes}
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="padding:4px">
+                                                        <td style="padding:4px">
+                                                            #{produtoBean.produto.peso}
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="background-color: whitesmoke;">
+                                                        <td style="padding:4px">
+                                                            #{produtoBean.produto.garantia}
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="padding:4px">
+                                                        <td style="padding:4px">
+                                                            #{produtoBean.produto.referenciaModelo}
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="background-color: whitesmoke;">
+                                                        <td style="padding:4px">
+                                                            #{produtoBean.produto.fornecedor}
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="padding:4px">
+                                                        <td style="padding:4px">
+                                                            #{produtoBean.produto.sac}
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="tab-pane fade" id="service-three">
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </ui:define>
+    </ui:composition>
+</html>

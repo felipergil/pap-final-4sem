@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+
+    <script>
+        function formatar(mascara, documento) {
+            var i = documento.value.length;
+            var saida = mascara.substring(0, 1);
+            var texto = mascara.substring(i);
+
+            if (texto.substring(0, 1) != saida) {
+                documento.value += texto.substring(0, 1);
+            }
+        }
+
+    </script>
+
+
+
+
+    <ui:composition template="/WEB-INF/template/template.xhtml">   
+        <ui:define name="content">
+
+            <div class="jumbotron">
+                <div class="container">
+                    <h:form acceptcharset="UTF-8" id="cadastro" >
+                        
+                        <div class="col-lg-12 well">
+
+
+                            <div class="col-sm-12">
+                                <div class="row">
+                                    <div class="col-sm-6 form-group">
+                                        <h:outputLabel value="Email *" for="email"/> 
+                                        <h:inputText id="email" value="#{clienteBean.email}" pt:placeholder="Digite o email" required="true" requiredMessage="Campo Email deve ser preenchido" class="form-control" validatorMessage="Formato de E-mail incorreto" >
+                                            <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/>  
+                                        </h:inputText>
+                                        <h:message for="email" style="color:red"/>
+                                    </div>
+                                    <div class="col-sm-6 form-group">
+                                        <h:outputLabel value="Senha *" for="senha"/> 
+                                        <h:inputSecret id="senha" value="#{clienteBean.senha}" pt:placeholder="Digite a senha" class="form-control" required="true" requiredMessage="Campo Senha deve ser preenchido"/>
+                                        <h:message for="senha" style="color:red"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12">
+                                <div class="row">
+                                    <div class="col-sm-4 form-group">
+                                        <h:outputLabel value="Nome" for="nome"/> 
+                                        <h:inputText id="nome" value="#{clienteBean.nome}" pt:placeholder="Digite o nome completo" required="true" requiredMessage="Campo Nome deve ser preenchido" class="form-control"/>
+                                        <h:message for="nome" style="color:red"/>
+                                    </div>
+                                    <div class="col-sm-4 form-group">
+                                        <h:outputLabel value="CPF" for="cpf"/> 
+                                        <h:inputText id="cpf" value="#{clienteBean.cpf}" pt:placeholder="Digite o CPF (apenas números)" class="form-control" maxlength="14" onkeypress="formatar('###.###.###-##', this)" required="true" requiredMessage="Campo CPF deve ser preenchido" validatorMessage="CPF Inválido">
+                                            <f:validator validatorId="CPFValidator"/>
+                                        </h:inputText>
+                                        <h:message for="cpf" style="color:red"/>
+                                    </div>
+                                    <div class="col-sm-4 form-group">
+                                        <label>Data de nascimento</label>
+                                        <h:inputText id="nascimento" value="#{clienteBean.datanascimento}" pt:placeholder="DD/MM/AAAA" class="form-control" maxlength="10" onkeypress="formatar('##/##/####', this)" required="true" requiredMessage="Campo Data de Nascimento deve ser preenchido" validatorMessage="Data Inválida">
+                                            <f:validator validatorId="DateValidator"/>
+                                        </h:inputText>                    
+                                        <h:message for="nascimento" style="color:red"/>
+                                    </div>
+                                </div>					
+
+                                <div class="row">
+                                    <div class="col-sm-4 form-group">
+                                        <label>Rua</label>
+                                        <h:inputText id="rua" value="#{clienteBean.rua}" pt:placeholder="Digite a rua" class="form-control" required="true" requiredMessage="Campo Rua deve ser preenchido"/>
+                                        <h:message for="rua" style="color:red"/>
+                                    </div>	
+                                    <div class="col-sm-4 form-group">
+                                        <label>Número</label>
+                                        <h:inputText id="numero" value="#{clienteBean.numeroendereco}" pt:placeholder="Digite o número" class="form-control" required="true" requiredMessage="Campo Número deve ser preenchido"/>
+                                        <h:message for="numero" style="color:red"/>
+                                    </div>	
+                                    <div class="col-sm-4 form-group">
+                                        <label>Bairro</label>
+                                        <h:inputText id="bairro" value="#{clienteBean.bairro}" pt:placeholder="Digite o bairro" class="form-control" required="true" requiredMessage="Campo Bairro deve ser preenchido"/>
+                                        <h:message for="bairro" style="color:red"/>
+                                    </div>		
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-4 form-group">
+                                        <label>CEP</label>
+                                        <h:inputText id="cep" value="#{clienteBean.cep}" pt:placeholder="Digite o CEP (apenas números)" class="form-control" maxlength="9" onkeypress="formatar('#####-###', this)" required="true" requiredMessage="Campo CEP deve ser preenchido"/>
+                                        <h:message for="cep" style="color:red"/>
+                                    </div>
+                                    <div class="col-sm-4 form-group">
+                                        <label>Cidade</label>
+                                        <h:inputText id="cidade" value="#{clienteBean.cidade}" pt:placeholder="Digite a cidade" class="form-control" required="true" requiredMessage="Campo Cidade deve ser preenchido"/>
+                                        <h:message for="cidade" style="color:red"/>
+                                    </div>		
+                                    <div class="col-sm-4 form-group">
+                                        <label>Estado</label>
+                                        <h:selectOneMenu id="estado" value="#{clienteBean.estado}" pt:placeholder="Selecione o estado" class="form-control" required="true" requiredMessage="Campo Estado deve ser preenchido">
+                                            <f:selectItem itemLabel="Acre" itemValue="Acre"/>
+                                            <f:selectItem itemLabel="Alagoas" itemValue="Alagoas"/>
+                                            <f:selectItem itemLabel="Amapá" itemValue="Amapá"/>
+                                            <f:selectItem itemLabel="Amazonas" itemValue="Amazonas"/>
+                                            <f:selectItem itemLabel="Bahia" itemValue="Bahia"/>
+                                            <f:selectItem itemLabel="Ceará" itemValue="Ceará"/>
+                                            <f:selectItem itemLabel="Distrito Federal" itemValue="Distrito Federal"/>
+                                            <f:selectItem itemLabel="Espírito Santo" itemValue="Esírito Santo"/>
+                                            <f:selectItem itemLabel="Goiás" itemValue="Goiás"/>
+                                            <f:selectItem itemLabel="Maranhão" itemValue="Maranhão"/>
+                                            <f:selectItem itemLabel="Mato Grosso" itemValue="Mato Grosso"/>
+                                            <f:selectItem itemLabel="Mato Grosso do Sul" itemValue="Mato Grosso do Sul"/>
+                                            <f:selectItem itemLabel="Minas Gerais" itemValue="Minas Gerais"/>
+                                            <f:selectItem itemLabel="Pará" itemValue="Pará"/>
+                                            <f:selectItem itemLabel="Pará" itemValue="Pará"/>
+                                            <f:selectItem itemLabel="Paraíba" itemValue="Paraíba"/>
+                                            <f:selectItem itemLabel="Paraná" itemValue="Paraná"/>
+                                            <f:selectItem itemLabel="Pernambuco" itemValue="Pernambuco"/>
+                                            <f:selectItem itemLabel="Piauí" itemValue="Piauí"/>
+                                            <f:selectItem itemLabel="Rio de Janeiro" itemValue="Rio de Janeiro"/>
+                                            <f:selectItem itemLabel="Rio Grande do Norte" itemValue="Rio Grande do Norte"/>
+                                            <f:selectItem itemLabel="Rio Grande do Sul" itemValue="Rio Grande do Sul"/>
+                                            <f:selectItem itemLabel="Rondônia" itemValue="Rondônia"/>
+                                            <f:selectItem itemLabel="Roraima" itemValue="Roraima"/>
+                                            <f:selectItem itemLabel="Santa Catarina" itemValue="Santa Catarina"/>
+                                            <f:selectItem itemLabel="São Paulo" itemValue="Sâo Paulo"/>
+                                            <f:selectItem itemLabel="Sergipe" itemValue="Sergipe"/>
+                                            <f:selectItem itemLabel="Tocantins" itemValue="Tocantins"/>
+
+
+                                        </h:selectOneMenu>
+
+                                        <h:message for="estado" style="color:red"/>
+                                    </div>	
+                                </div>
+
+                                <div class="row">					
+                                    <div class="col-sm-6 form-group">
+                                        <label>Telefone fixo</label>
+                                        <h:inputText id="telefone" value="#{clienteBean.telefone}" pt:placeholder="Ex: 11XXXXXXXX" class="form-control" maxlength="12" required="true" requiredMessage="Campo Telefone fixo deve ser preenchido" validatorMessage="Utilize apenas números">
+                                            <f:validateRegex pattern="[0-9]+" />
+                                            <f:validateLength for="telefone" minimum="10" maximum="10"/>
+                                        </h:inputText>
+                                        <h:message for="telefone" style="color:red"/>
+                                    </div>
+                                    <div class="col-sm-6 form-group">
+                                        <label>Celular</label>
+                                        <h:inputText id="celular" value="#{clienteBean.celular}" pt:placeholder="Ex: 11XXXXXXXX" class="form-control" maxlength="13" required="true" requiredMessage="Campo Celular deve ser preenchido" validatorMessage="Utilize apenas números e formato correto">
+                                            <f:validateRegex pattern="[0-9]+" />
+                                            <f:validateLength for="telefone" minimum="10" maximum="11"/>
+                                        </h:inputText>	
+                                        <h:message for="celular" style="color:red"/>
+                                    </div>
+
+                                </div>
+
+
+
+
+                                <p align="right"><h:commandButton value="Cadastrar" action ="#{clienteBean.salvar()}" class="btn btn-lg btn-info"/></p>				
+                            </div>
+
+
+                        </div>
+                    </h:form> 
+                </div>
+
+
+            </div>
+
+        </ui:define>
+    </ui:composition>
+</html>
+

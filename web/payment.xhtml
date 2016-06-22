@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <ui:composition template="/WEB-INF/template/template.xhtml">
+        <ui:define name="content">
+
+            <div class="container">
+                <form action="https://www.sandbox.paypal.com/cgi-bin/websrc" method="post">
+                    <input type="hidden" name="cmd" value="_cart"/>
+                    <input type="hidden" name="upload" value="1"/>
+                    <c:set var="dem" value="1"/>
+                    <c:forEach items="#{carrinhoBean.itensCarrinho.entrySet().toArray()}" var="i">
+                        <input type="hidden" name="item_number_#{dem}" value="#{i.key.simbolo}"/>
+                        <input type="hidden" name="item_name_#{dem}" value="#{i.key.titulo}"/>
+                        <input type="hidden" name="quantity_#{dem}" value="#{i.value}"/>
+                        <input type="hidden" name="amount_#{dem}" value="#{i.key.valor}"/>
+
+                        <c:set var="dem" value="#{dem+1}"/>
+                    </c:forEach>
+
+                    <input type="hidden" name="currency_code" value="BRL"/>
+
+                    <input type="hidden" name="business" value="felipe1994-facilitator@gmail.com"/>
+                    <input type="hidden" name="return" value="http://localhost:8080/LowPriceCell/"/>
+                    <input type="hidden" name="cancel" value="http://localhost:8080/LowPriceCell/"/>
+                    <p align="center"><input type="image" name="submit" border="0" src="https://www.paypalobjects.com/en_US/i/btn/btn_xpressCheckout.gif"
+                                             alt="PayPal - The safer, easier way to pay online"/></p>
+
+
+
+                </form>
+
+                <h:form>
+                    <p align="center"><h:commandLink action="boleto?faces-redirect=true" target="_blank" class="btn btn-lg btn-info" value="Pagar com boleto" ></h:commandLink></p>
+                </h:form>
+            </div>    
+
+        </ui:define>
+    </ui:composition>
+</html>

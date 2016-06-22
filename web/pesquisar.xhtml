@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <ui:composition template="/WEB-INF/template/template.xhtml">
+        <ui:define name="content">
+
+            <h:form>
+                <div class="container">
+                    <div class="col-lg-12 well">
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <h:selectOneMenu id="pesquisa" value="#{produtoBean.tipoPesquisa}" class="form-control">
+                                    <f:selectItem itemLabel="Filtrar por:"/>
+                                    <f:selectItems value="#{produtoBean.pesquisaValue}"/>
+                                    <f:ajax render="input"/>
+
+                                </h:selectOneMenu>
+
+                                <h:panelGroup id="input">
+
+
+
+                                    <h:inputText  rendered="#{produtoBean.tipoPesquisa == 'Nome'}" value="#{produtoBean.pesquisa}" class="form-control"></h:inputText>
+                                    <p align="center"><h:commandButton action="#{produtoBean.retornaProdutosPorNome()}" rendered="#{produtoBean.tipoPesquisa == 'Nome'}" value="Pesquisar" class="btn btn-lg btn-info"/></p>
+
+                                    <h:selectOneMenu id="pesquisacor" value="#{produtoBean.pesquisa}" class="form-control" rendered="#{produtoBean.tipoPesquisa == 'Cor'}">
+                                        <f:selectItems value="#{produtoBean.pesquisaValueCor}"/>
+                                    </h:selectOneMenu>
+                                    <h:commandButton action="#{produtoBean.retornaProdutosPorCor()}" rendered="#{produtoBean.tipoPesquisa == 'Cor'}" value="Pesquisar" class="btn btn-lg btn-info"/>
+
+                                    <h:selectOneMenu id="pesquisadisplay" value="#{produtoBean.pesquisa}" class="form-control" rendered="#{produtoBean.tipoPesquisa == 'Tamanho display'}">
+                                        <f:selectItems value="#{produtoBean.pesquisaValueDisplay}"/>
+                                    </h:selectOneMenu>
+                                    <h:commandButton action="#{produtoBean.retornaProdutosPorDisplay()}" rendered="#{produtoBean.tipoPesquisa == 'Tamanho display'}" value="Pesquisar" class="btn btn-lg btn-info"/>
+
+                                    <h:selectOneMenu id="pesquisamemoriaexpansiva" value="#{produtoBean.pesquisa}" class="form-control" rendered="#{produtoBean.tipoPesquisa == 'Memória expansiva'}">
+                                        <f:selectItems value="#{produtoBean.pesquisaValueMemoriaExpansiva}"/>
+                                    </h:selectOneMenu>
+                                    <h:commandButton action="#{produtoBean.retornaProdutosPorMemoriaExpansiva()}" rendered="#{produtoBean.tipoPesquisa == 'Memória expansiva'}" value="Pesquisar" class="btn btn-lg btn-info"/>          
+
+                                    <h:selectOneMenu id="pesquisamemoriainterna" value="#{produtoBean.pesquisa}" class="form-control" rendered="#{produtoBean.tipoPesquisa == 'Memória interna'}">
+                                        <f:selectItems value="#{produtoBean.pesquisaValueMemoriaInterna}"/>
+                                    </h:selectOneMenu>
+                                    <h:commandButton action="#{produtoBean.retornaProdutosPorMemoria()}" rendered="#{produtoBean.tipoPesquisa == 'Memória interna'}" value="Pesquisar" class="btn btn-lg btn-info"/>
+
+                                    <h:selectOneMenu id="pesquisaram" value="#{produtoBean.pesquisa}" class="form-control" rendered="#{produtoBean.tipoPesquisa == 'Memória RAM'}">
+                                        <f:selectItems value="#{produtoBean.pesquisaValueRam}"/>
+                                    </h:selectOneMenu>
+                                    <h:commandButton action="#{produtoBean.retornaProdutosPorMemoriaRam()}" rendered="#{produtoBean.tipoPesquisa == 'Memória RAM'}" value="Pesquisar" class="btn btn-lg btn-info"/>
+
+                                    <h:outputLabel rendered="#{produtoBean.tipoPesquisa == 'Valor'}" value="De R$: "/> <h:inputText  rendered="#{produtoBean.tipoPesquisa == 'Valor'}" value="#{produtoBean.valorInicial}" class="form-control"></h:inputText>
+                                    <h:outputLabel rendered="#{produtoBean.tipoPesquisa == 'Valor'}" value="Até R$: "/><h:inputText  rendered="#{produtoBean.tipoPesquisa == 'Valor'}" value="#{produtoBean.valorFinal}" class="form-control"></h:inputText>
+                                    <h:commandButton action="#{produtoBean.retornaProdutosPorValor()}" rendered="#{produtoBean.tipoPesquisa == 'Valor'}" value="Pesquisar" class="btn btn-lg btn-info"/>
+
+
+
+
+
+                                </h:panelGroup>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <h:dataTable value="#{produtoBean.retornaProdutosPorNome()}" var="p" >
+                        <h:column>
+                            <div id="products" class="row list-group">
+                                <div class="item  col-xs-4 col-lg-4 list-group-item">
+                                    <div class="thumbnail">
+                                        <img class="group list-group-image" src="#{p.imagemInicial}" alt="" />
+                                        <div class="caption">
+                                            <h4 class="group inner list-group-item-heading">
+                                                #{p.titulo}</h4>
+                                            <p class="group inner list-group-item-text">
+                                                #{p.miniDescricao}</p>
+                                            <div class="row">
+                                                <div class="col-xs-12 col-md-6">
+                                                    <p class="lead">
+                                                        R$ #{p.valor}</p>
+                                                </div>
+                                                <div class="col-xs-12 col-md-6">
+
+                                                    <h:outputLink class="btn btn-success"  value="detalheproduto.xhtml">
+                                                        <f:param name="query" value="#{p.simbolo}"/>
+                                                        <h:outputText value="Mais informações"/>
+                                                    </h:outputLink>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>    
+                        </h:column>
+                    </h:dataTable>
+
+                    <h:dataTable value="#{produtoBean.retornaProdutosPorCor()}" var="p" >
+                        <h:column>
+                            <div id="products" class="row list-group">
+                                <div class="item  col-xs-4 col-lg-4 list-group-item">
+                                    <div class="thumbnail">
+                                        <img class="group list-group-image" src="#{p.imagemInicial}" alt="" />
+                                        <div class="caption">
+                                            <h4 class="group inner list-group-item-heading">
+                                                #{p.titulo}</h4>
+                                            <p class="group inner list-group-item-text">
+                                                #{p.miniDescricao}</p>
+                                            <div class="row">
+                                                <div class="col-xs-12 col-md-6">
+                                                    <p class="lead">
+                                                        R$ #{p.valor}</p>
+                                                </div>
+                                                <div class="col-xs-12 col-md-6">
+
+                                                    <h:outputLink class="btn btn-success"  value="detalheproduto.xhtml">
+                                                        <f:param name="query" value="#{p.simbolo}"/>
+                                                        <h:outputText value="Mais informações"/>
+                                                    </h:outputLink>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>    
+                        </h:column>
+                    </h:dataTable>
+
+                    <h:dataTable value="#{produtoBean.retornaProdutosPorDisplay()}" var="p" >
+                        <h:column>
+                            <div id="products" class="row list-group">
+                                <div class="item  col-xs-4 col-lg-4 list-group-item">
+                                    <div class="thumbnail">
+                                        <img class="group list-group-image" src="#{p.imagemInicial}" alt="" />
+                                        <div class="caption">
+                                            <h4 class="group inner list-group-item-heading">
+                                                #{p.titulo}</h4>
+                                            <p class="group inner list-group-item-text">
+                                                #{p.miniDescricao}</p>
+                                            <div class="row">
+                                                <div class="col-xs-12 col-md-6">
+                                                    <p class="lead">
+                                                        R$ #{p.valor}</p>
+                                                </div>
+                                                <div class="col-xs-12 col-md-6">
+
+                                                    <h:outputLink class="btn btn-success"  value="detalheproduto.xhtml">
+                                                        <f:param name="query" value="#{p.simbolo}"/>
+                                                        <h:outputText value="Mais informações"/>
+                                                    </h:outputLink>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>    
+                        </h:column>
+                    </h:dataTable>
+
+                    <h:dataTable value="#{produtoBean.retornaProdutosPorMemoriaExpansiva()}" var="p" >
+                        <h:column>
+                            <div id="products" class="row list-group">
+                                <div class="item  col-xs-4 col-lg-4 list-group-item">
+                                    <div class="thumbnail">
+                                        <img class="group list-group-image" src="#{p.imagemInicial}" alt="" />
+                                        <div class="caption">
+                                            <h4 class="group inner list-group-item-heading">
+                                                #{p.titulo}</h4>
+                                            <p class="group inner list-group-item-text">
+                                                #{p.miniDescricao}</p>
+                                            <div class="row">
+                                                <div class="col-xs-12 col-md-6">
+                                                    <p class="lead">
+                                                        R$ #{p.valor}</p>
+                                                </div>
+                                                <div class="col-xs-12 col-md-6">
+
+                                                    <h:outputLink class="btn btn-success"  value="detalheproduto.xhtml">
+                                                        <f:param name="query" value="#{p.simbolo}"/>
+                                                        <h:outputText value="Mais informações"/>
+                                                    </h:outputLink>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>    
+                        </h:column>
+                    </h:dataTable>
+
+                    <h:dataTable value="#{produtoBean.retornaProdutosPorMemoria()}" var="p" >
+                        <h:column>
+                            <div id="products" class="row list-group">
+                                <div class="item  col-xs-4 col-lg-4 list-group-item">
+                                    <div class="thumbnail">
+                                        <img class="group list-group-image" src="#{p.imagemInicial}" alt="" />
+                                        <div class="caption">
+                                            <h4 class="group inner list-group-item-heading">
+                                                #{p.titulo}</h4>
+                                            <p class="group inner list-group-item-text">
+                                                #{p.miniDescricao}</p>
+                                            <div class="row">
+                                                <div class="col-xs-12 col-md-6">
+                                                    <p class="lead">
+                                                        R$ #{p.valor}</p>
+                                                </div>
+                                                <div class="col-xs-12 col-md-6">
+
+                                                    <h:outputLink class="btn btn-success"  value="detalheproduto.xhtml">
+                                                        <f:param name="query" value="#{p.simbolo}"/>
+                                                        <h:outputText value="Mais informações"/>
+                                                    </h:outputLink>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>    
+                        </h:column>
+                    </h:dataTable>
+
+                    <h:dataTable value="#{produtoBean.retornaProdutosPorMemoriaRam()}" var="p" >
+                        <h:column>
+                            <div id="products" class="row list-group">
+                                <div class="item  col-xs-4 col-lg-4 list-group-item">
+                                    <div class="thumbnail">
+                                        <img class="group list-group-image" src="#{p.imagemInicial}" alt="" />
+                                        <div class="caption">
+                                            <h4 class="group inner list-group-item-heading">
+                                                #{p.titulo}</h4>
+                                            <p class="group inner list-group-item-text">
+                                                #{p.miniDescricao}</p>
+                                            <div class="row">
+                                                <div class="col-xs-12 col-md-6">
+                                                    <p class="lead">
+                                                        R$ #{p.valor}</p>
+                                                </div>
+                                                <div class="col-xs-12 col-md-6">
+
+                                                    <h:outputLink class="btn btn-success"  value="detalheproduto.xhtml">
+                                                        <f:param name="query" value="#{p.simbolo}"/>
+                                                        <h:outputText value="Mais informações"/>
+                                                    </h:outputLink>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>    
+                        </h:column>
+                    </h:dataTable>       
+
+                    <h:dataTable value="#{produtoBean.retornaProdutosPorValor()}" var="p" >
+                        <h:column>
+                            <div id="products" class="row list-group">
+                                <div class="item  col-xs-4 col-lg-4 list-group-item">
+                                    <div class="thumbnail">
+                                        <img class="group list-group-image" src="#{p.imagemInicial}" alt="" />
+                                        <div class="caption">
+                                            <h4 class="group inner list-group-item-heading">
+                                                #{p.titulo}</h4>
+                                            <p class="group inner list-group-item-text">
+                                                #{p.miniDescricao}</p>
+                                            <div class="row">
+                                                <div class="col-xs-12 col-md-6">
+                                                    <p class="lead">
+                                                        R$ #{p.valor}</p>
+                                                </div>
+                                                <div class="col-xs-12 col-md-6">
+
+                                                    <h:outputLink class="btn btn-success"  value="detalheproduto.xhtml">
+                                                        <f:param name="query" value="#{p.simbolo}"/>
+                                                        <h:outputText value="Mais informações"/>
+                                                    </h:outputLink>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>    
+                        </h:column>
+                    </h:dataTable>
+                </div>
+
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>

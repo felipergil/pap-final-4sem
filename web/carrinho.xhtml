@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+
+    <ui:composition template="/WEB-INF/template/template.xhtml">   
+        <ui:define name="content">
+            <h:form>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-10 col-md-offset-1">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Produto</th>
+                                        <th>Quantidade</th>
+                                        <th class="text-center">Preço</th>
+                                        <th class="text-center">Total</th>
+                                        <th> </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <ui:repeat value="#{carrinhoBean.itensCarrinho.entrySet().toArray()}" var="p">
+                                        <tr>
+
+                                            <td class="col-sm-8 col-md-6">
+                                                <div class="media">
+                                                    <a class="thumbnail pull-left" href="#"> <img class="media-object" src="#{p.key.imagemInicial}" style="width: 72px; height: 72px;"/> </a>
+                                                    <div class="media-body">
+                                                        <h4 class="media-heading">#{p.key.titulo}</h4>
+                                                        <h5 class="media-heading">#{p.key.marca}</h5>
+                                                        <span>Status: </span><span class="text-success"><strong>Em estoque</strong></span>
+                                                    </div>
+                                                </div></td>
+                                            <td class="col-sm-1 col-md-1" style="text-align: center">
+                                                <h:outputText id="exampleInputEmail1" value="#{p.value}"/>
+
+                                            </td>
+                                            <td class="col-sm-1 col-md-1 text-center"><strong>R$ #{p.key.valor}</strong></td>
+                                            <td class="col-sm-1 col-md-1 text-center"><strong><h:outputText rendered="#{p.value == 1}" value="R$ #{p.key.valor}"/> <h:outputText rendered="#{p.value > 1}" value="R$ #{p.key.valor * p.value}"/></strong></td>
+
+                                            <td class="col-sm-1 col-md-1">
+
+                                                <h:form>    
+
+                                                    <h:commandButton  value="Adicionar" action="#{carrinhoBean.add(p.key)}" class="btn btn-success"/>
+                                                    <br/>
+                                                    <br/>
+                                                    <h:commandButton  value="Remover" action="#{carrinhoBean.remove(p.key)}" class="btn btn-danger"/>
+
+                                                </h:form>
+                                            </td>
+
+
+
+
+                                        </tr>
+                                    </ui:repeat>
+                                    <tr>
+                                        <td>   </td>
+                                        <td>   </td>
+                                        <td>   </td>
+                                        <td><h5>Subtotal</h5></td>
+                                        <td class="text-right"><h5><strong>R$ #{carrinhoBean.somarValorTotal()}</strong></h5></td>
+                                    </tr>
+                                    <tr>
+                                        <td>   </td>
+                                        <td>   </td>
+                                        <td>   </td>
+                                        <td><h5>Frete</h5></td>
+                                        <td class="text-right"><h5><strong>R$ 6.94</strong></h5></td>
+                                    </tr>
+                                    <tr>
+                                        <td>   </td>
+                                        <td>   </td>
+                                        <td>   </td>
+                                        <td><h3>Total</h3></td>
+                                        <td class="text-right"><h3><strong>R$ #{carrinhoBean.somarValorTotal() + 6.94}</strong></h3></td>
+                                    </tr>
+                                    <tr>
+                                        <td>   </td>
+                                        <td>   </td>
+                                        <td>   </td>
+                                        <td>
+                                            <button type="button" class="btn btn-default" href="index.html">
+                                                <span class="glyphicon glyphicon-shopping-cart"></span> Continuar comprando
+                                            </button></td>
+                                        <td>
+
+                                            <h:commandButton action="#{carrinhoBean.salvarPedido()}"  value="Finalizar compra">
+
+                                            </h:commandButton>
+
+                                        </td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>
+
+

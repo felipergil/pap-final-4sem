@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <ui:composition>
+
+
+
+
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="index.xhtml">LowPriceCell</a>
+                </div>
+
+
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="index.xhtml">Página Inicial <span class="sr-only">(current)</span></a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Marcas <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="celularesapple.xhtml">Apple</a></li>
+                                <li><a href="celularessamsung.xhtml">Samsung</a></li>
+                                <li><a href="celulareslg.xhtml">LG</a></li>
+                                <li><a href="celularesmotorola.xhtml">Motorola</a></li>
+                                <li><a href="celularesmicrosoft.xhtml">Microsoft</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Categoria <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+
+                                <li><a href="celularesentrada.xhtml">Entrada</a></li>
+                                <li><a href="celularesintermediario.xhtml">Intermediário</a></li>
+                                <li><a href="celulareshighend.xhtml">High end</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Sistema Operacional <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+
+                                <li><a href="celularesandroid.xhtml">Android</a></li>
+                                <li><a href="celularesios.xhtml">IOS</a></li>
+                                <li><a href="celulareswindows.xhtml">Windows Phone</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+
+
+
+                    <h:form>
+                        <ul class="nav navbar-nav navbar-right">
+
+                            <li><a href="pesquisar.xhtml"><span class="glyphicon glyphicon-search" data-toggle="modal" data-target="#myModal" title="Pesquisar" style="color:black"></span></a></li>
+                            <h:form rendered="#{clienteBean.login() == null}" acceptcharset="UTF-8">
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Logar/Cadastrar<span class="caret"></span></a>
+                                    <ul class="dropdown-menu" style="padding: 15px;min-width: 250px;">
+                                        <li>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <h:form class="form" id="login-nav">
+                                                        <div class="form-group">
+                                                            <label class="sr-only" for="exampleInputEmail2">Email</label>
+                                                            <h:inputText class="form-control" id="exampleInputEmail2" pt:placeholder="E-mail" value="#{clienteBean.email}"/>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="sr-only" for="exampleInputPassword2">Senha</label>
+                                                            <h:inputSecret class="form-control" id="exampleInputPassword2" value="#{clienteBean.senha}" pt:placeholder="Senha"/>
+                                                        </div>
+                                                        <div class="checkbox">
+                                                            <label>
+                                                                <input type="checkbox"></input> Lembrar senha
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <h:commandButton class="btn btn-success btn-block" value="Entrar" action="#{clienteBean.login()}"/>
+                                                        </div>
+                                                    </h:form>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="divider"></li>
+                                        <li>
+                                            <h:outputLink class="btn btn-primary btn-block" type="button" id="sign-in-google" value="cadastrocliente.xhtml"><span class="ui-button-text" style="color:white">Cadastre-se </span></h:outputLink>
+
+                                        </li>
+                                    </ul>   
+
+                                </li>               
+                            </h:form>
+                            <h:form rendered="#{clienteBean.login() != null}" acceptcharset="UTF-8">
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">#{clienteBean.email} <span class="caret"></span></a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="minhaconta.xhtml">Minha conta</a></li>
+                                        <li><a href="#">Meus Pedidos</a></li>
+                                        <li class="divider"></li>
+                                        <li>
+                                            <li align="center"><h:commandButton action="#{clienteBean.logout()}" value="Sair" class="btn btn-danger"></h:commandButton></li>
+
+                                        </li>            
+                                    </ul>
+
+                                </li>               
+                            </h:form>
+                        </ul>
+                    </h:form>
+
+
+
+                    <ul class="nav navbar-nav navbar-header">
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <span class="glyphicon glyphicon-shopping-cart"></span> <h:outputText id="cartSize" value="#{carrinhoBean.carrinhoTamanho} - iten(s)"/><span class="caret"></span></a>                             
+                            <ul class="dropdown-menu dropdown-cart" role="menu">                                  
+                                <li>
+                                    <li><a class="text-center" href="carrinho.xhtml">Ver Carrinho</a></li>
+                                </li>                               
+                            </ul>
+                        </li> 
+
+                    </ul>
+
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+
+    </ui:composition>
+
+
+
+</html>

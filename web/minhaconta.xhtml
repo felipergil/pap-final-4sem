@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    
+    <script type="text/javascript">
+   function setHiddenValue(new_value){
+			
+	document.getElementById('myForm:hidden2').value = new_value;
+			
+   }
+</script>
+
+    <ui:composition template="/WEB-INF/template/template.xhtml">
+        <ui:define name="content">
+
+            <h:form>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-08 col-sm-offset-1" id="logout">
+                            <div class="page-header">
+                                <h3 class="reviews">Minha conta</h3>
+                            </div>
+                            <div class="comment-tabs">
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li class="active"><a href="#pedidos" role="tab" data-toggle="tab"><h4 class="reviews text-capitalize">Pedidos</h4></a></li>
+                                    <li><a href="#dados" role="tab" data-toggle="tab"><h4 class="reviews text-capitalize">Informações da conta</h4></a></li>
+                                </ul>            
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="pedidos">
+
+
+                                        <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Código Identificador</th>
+                            <th>Data</th>
+                            <th>Status</th>
+                            <th>Frete</th>
+                            <th>Valor Total</th>
+                            <th>Produtos</th>
+                        </tr>    
+                    </thead>
+                    <tbody>
+                        <ui:repeat value="#{indiceBean.pedidos}" var="p">
+
+                            <tr>
+
+                                <td><h:outputText value="#{p.identificador}"></h:outputText></td>
+                                <td><h:outputText value="#{p.datahora}"></h:outputText></td>
+                                <td><h:outputText value="#{p.status}"></h:outputText></td>
+                                <td><h:outputText value="#{p.frete}"></h:outputText></td>
+                                <td><h:outputText value="#{p.valorcompra}"></h:outputText></td>
+                                <td><h:link value="Ver produtos" outcome="/minhaconta" fragment="modalPedido">
+                                        <f:param name="query" value="#{p.identificador}" />
+                                    </h:link></td>
+                            </tr>
+
+                        </ui:repeat>
+                    </tbody>
+                </table>
+
+                                    </div>
+
+                                    <div class="tab-pane" id="dados">
+
+                                        <h:form  class="form-horizontal" id="accountSetForm" acceptcharset="UTF-8">
+
+                                            <div class="form-group">
+                                                <label for="name" class="col-sm-2 control-label">Nome</label>
+                                                <div class="col-sm-08">
+                                                    <h:inputText class="form-control" id="name" disabled="true" value="#{clienteBean.nome}"/>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="email" class="col-sm-2 control-label">Email</label>
+                                                <div class="col-sm-08">
+                                                    <h:inputText class="form-control" id="email" disabled="true" value="#{clienteBean.email}"/>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="cpf" class="col-sm-2 control-label">CPF</label>
+                                                <div class="col-sm-08">
+                                                    <h:inputText class="form-control" id="cpf" disabled="true" value="#{clienteBean.cpf}"/>
+                                                </div>
+                                            </div>  
+                                            <div class="form-group">
+                                                <label for="data" class="col-sm-2 control-label">Data de Nascimento</label>
+                                                <div class="col-sm-08">
+                                                    <h:inputText class="form-control" id="data" value="#{clienteBean.datanascimento}"/>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="rua" class="col-sm-2 control-label">Rua</label>
+                                                <div class="col-sm-08">
+                                                    <h:inputText class="form-control" id="rua" value="#{clienteBean.rua}"/>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="numero" class="col-sm-2 control-label">Número</label>
+                                                <div class="col-sm-08">
+                                                    <h:inputText class="form-control" id="numero" value="#{clienteBean.numeroendereco}"/>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="bairro" class="col-sm-2 control-label">Bairro</label>
+                                                <div class="col-sm-08">
+                                                    <h:inputText class="form-control" id="bairro" value="#{clienteBean.bairro}"/>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="cep" class="col-sm-2 control-label">CEP</label>
+                                                <div class="col-sm-08">
+                                                    <h:inputText class="form-control" id="cep" value="#{clienteBean.cep}"/>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="cidade" class="col-sm-2 control-label">Cidade</label>
+                                                <div class="col-sm-08">
+                                                    <h:inputText class="form-control" id="cidade" value="#{clienteBean.cidade}"/>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="estado" class="col-sm-2 control-label">Estado</label>
+                                                <div class="col-sm-08">
+                                                    <h:inputText class="form-control" id="estado" value="#{clienteBean.estado}"/>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="telefone" class="col-sm-2 control-label">Telefone</label>
+                                                <div class="col-sm-08">
+                                                    <h:inputText class="form-control" id="telefone" value="#{clienteBean.telefone}"/>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="celular" class="col-sm-2 control-label">Celular</label>
+                                                <div class="col-sm-08">
+                                                    <h:inputText class="form-control" id="celular" value="#{clienteBean.celular}"/>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="novasenha" class="col-sm-2 control-label">Nova Senha</label>
+                                                <div class="col-sm-08">
+                                                    <h:inputSecret class="form-control" id="novasenha" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="confirmarsenha" class="col-sm-2 control-label">Confirmar Nova Senha</label>
+                                                <div class="col-sm-08">
+                                                    <h:inputSecret class="form-control" id="confirmarsenha" value="#{clienteBean.senha}" redisplay="true"/>
+
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-offset-2 col-sm-08">                    
+                                                    <h:commandButton class="btn btn-primary btn-circle text-uppercase" type="submit" id="submit"  action="#{clienteBean.atualizarCliente()}" value="Salvar mudanças"/>
+                                                </div>
+                                            </div>            
+                                        </h:form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="container">
+
+                <div class="modal fade" id="modalPedido" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span></button>
+                                <h4 class="modal-title" id="myModalLabel">Detalhe do pedido</h4>
+                            </div>
+                            <div class="modal-body">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Produto</th>
+                                            <th>Quantidade</th>
+                                            <th>Valor</th>
+                                        </tr>    
+                                    </thead>
+                                    <tbody>
+                                        <ui:repeat value="#{pedidoBean.pedido}" var="p">
+                                            <tr>
+                                                <td><h:outputText value="#{p.produto}"></h:outputText></td>
+                                                <td><h:outputText value="#{p.quantidade}"></h:outputText></td>
+                                                <td><h:outputText value="#{p.valortotal}"></h:outputText></td>
+                                            </tr>
+
+                                        </ui:repeat>
+                                    </tbody>
+                                </table>
+
+
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+                
+            <!--Script para permitir que o modal seja aberto através de uma URL-->
+            <script>
+                $(document).ready(function () {
+
+                    if (window.location.href.indexOf('#modalPedido') != -1) {
+                        $('#modalPedido').modal('show');
+                    }
+
+                });
+            </script>
+
+                
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

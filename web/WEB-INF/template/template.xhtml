@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title><ui:insert name="title">LowPriceCell</ui:insert></title>
+        <f:facet name="first">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+            <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+         
+        </f:facet>
+        
+        <f:facet name="middle">
+            <link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/css/bootstrap.min.css"></link>
+            <link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/theme.css"></link>
+           
+            <h:outputStylesheet name="dashboard.css" library="css"/>
+            
+            <h:outputStylesheet name="bootstrap.css" library="css"/>
+            
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js" />
+            
+            <h:outputScript name="bootstrap/js/bootstrap.js" />
+            
+        <h:outputStylesheet name="customfooter.css" library="css" />
+        <h:outputStylesheet name="carousel.css" library="css" />
+        <h:outputStylesheet name="carousel2.css" library="css" />
+        <h:outputStylesheet name="carrinho.css" library="css" />
+        <h:outputStylesheet name="listadeprodutos.css" library="css" />
+        <h:outputStylesheet name="demo.css" library="css" />
+        <h:outputStylesheet name="footer-distributed-with-address-and-phones.css" library="css" />
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"/> 
+        <link href="http://fonts.googleapis.com/css?family=Cookie" rel="stylesheet" type="text/css"/>
+        <h:outputScript name="listadeprodutos.js" library="js" target="body"/>
+        <h:outputScript name="bootstrap.min.js" library="js" target="body"/>
+        <h:outputScript name="carousel.js" library="js" target="body"/>
+        <h:outputStylesheet name="minhaconta.css" library="css" />
+        <h:outputStylesheet name="detalheproduto.css" library="css" />
+            
+        </f:facet>
+        
+        <f:facet name="last">
+            
+        </f:facet>
+      
+    </h:head>
+    <h:body>
+        
+        <ui:include src="header.xhtml" />
+        
+        <div id="content">
+              <ui:insert name="content">
+              </ui:insert>
+            </div>
+        
+        <ui:include src="footer.xhtml" />
+        
+        <script
+        src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="../../dist/js/bootstrap.min.js"></script>
+        <script src="../../assets/js/docs.min.js"></script>
+        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+        <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+        
+     </h:body>
+    
+    
+
+</html>

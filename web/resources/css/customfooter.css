@@ -1,0 +1,16 @@
+	.no-margin {
+		margin:0px;
+	}
+	.no-padding {
+		padding:0px;
+	}
+	.site-footer {
+		position: fixed;
+    	height: 25px;
+    	bottom: 0;
+   		width: 100%;
+
+		background-color: #ccc;
+		color:#000;
+		
+	}	
