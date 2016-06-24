@@ -3,14 +3,6 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-    
-    <script type="text/javascript">
-   function setHiddenValue(new_value){
-			
-	document.getElementById('myForm:hidden2').value = new_value;
-			
-   }
-</script>
 
     <ui:composition template="/WEB-INF/template/template.xhtml">
         <ui:define name="content">
@@ -51,7 +43,7 @@
                                 <td><h:outputText value="#{p.datahora}"></h:outputText></td>
                                 <td><h:outputText value="#{p.status}"></h:outputText></td>
                                 <td><h:outputText value="#{p.frete}"></h:outputText></td>
-                                <td><h:outputText value="#{p.valorcompra}"></h:outputText></td>
+                                <td><h:outputText value="R$ #{p.valorcompra}"></h:outputText></td>
                                 <td><h:link value="Ver produtos" outcome="/minhaconta" fragment="modalPedido">
                                         <f:param name="query" value="#{p.identificador}" />
                                     </h:link></td>
@@ -155,7 +147,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <div class="col-sm-offset-2 col-sm-08">                    
-                                                    <h:commandButton class="btn btn-primary btn-circle text-uppercase" type="submit" id="submit"  action="#{clienteBean.atualizarCliente()}" value="Salvar mudanças"/>
+                                                    <h:commandButton class="btn btn-primary btn-circle text-uppercase" type="submit" id="submit"  action="#{clienteBean.salvar()}" value="Salvar mudanças"/>
                                                 </div>
                                             </div>            
                                         </h:form>
@@ -189,7 +181,7 @@
                                             <tr>
                                                 <td><h:outputText value="#{p.produto}"></h:outputText></td>
                                                 <td><h:outputText value="#{p.quantidade}"></h:outputText></td>
-                                                <td><h:outputText value="#{p.valortotal}"></h:outputText></td>
+                                                <td><h:outputText value="R$ #{p.valortotal}"></h:outputText></td>
                                             </tr>
 
                                         </ui:repeat>

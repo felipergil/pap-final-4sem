@@ -9,6 +9,8 @@ import EJB.PedidoService;
 import Model.Pedido;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 
 /**
@@ -26,5 +28,5 @@ public class PedidoDAO implements PedidoService {
     public Pedido addPedido(Pedido pedido) {
         return entityManager.merge(pedido);
     }
-
+   
 }

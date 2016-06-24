@@ -72,6 +72,102 @@ public class ProdutoBean implements Serializable {
     private String tipoTela;
     private String categoria;
 
+    /**
+     * Creates a new instance of ProdutoBean
+     */
+    @EJB
+    private OperacoesEJB operacoesEJB;
+
+    @ManagedProperty(value = "#{carrinhoBean}")
+    CarrinhoBean carrinho;
+
+    public CarrinhoBean getCarrinho() {
+        return carrinho;
+    }
+
+    public void setCarrinho(CarrinhoBean carrinho) {
+        this.carrinho = carrinho;
+    }
+
+    public ProdutoBean() {
+    }
+
+    public String getQuery() {
+        return FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("query");
+    }
+
+    public void checarExistenciaQuery() throws IOException {
+        if (operacoesEJB.checarExistenciaQuery(getQuery()) == 0
+                && operacoesEJB.checarExistenciaQueryCategoria(getQuery()) == 0
+                && operacoesEJB.checarExistenciaQueryMarca(getQuery()) == 0
+                && operacoesEJB.checarExistenciaQuerySistemaOperacional(getQuery()) == 0){
+            FacesContext.getCurrentInstance().getExternalContext().redirect("error.xhtml");
+        }
+    }
+
+    public Produto getProduto() {
+        return operacoesEJB.returnProduct(getQuery());
+    }
+
+    public void adicionarAoCarrinho() {
+        String query = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("query");
+        carrinho.add(operacoesEJB.returnProduct(query));
+    }
+
+    public List<Produto> retornaProdutosPorNome() {
+        ProdutoDAO produtoDAO = new ProdutoDAO();
+        produtos = produtoDAO.retornaProdutos(getPesquisa());
+        return produtos;
+    }
+
+    public List<Produto> retornaProdutosPorValor() {
+        ProdutoDAO produtoDAO = new ProdutoDAO();
+        produtos = produtoDAO.retornaProdutosValor(getValorInicial(), getValorFinal());
+        return produtos;
+    }
+
+    public List<Produto> retornaProdutosPorCor() {
+        ProdutoDAO produtoDAO = new ProdutoDAO();
+        produtos = produtoDAO.retornaProdutosCor(getPesquisa());
+        return produtos;
+    }
+
+    public List<Produto> retornaProdutosPorMemoria() {
+        ProdutoDAO produtoDAO = new ProdutoDAO();
+        produtos = produtoDAO.retornaProdutosMemoria(getPesquisa());
+        return produtos;
+    }
+
+    public List<Produto> retornaProdutosPorDisplay() {
+        ProdutoDAO produtoDAO = new ProdutoDAO();
+        produtos = produtoDAO.retornaProdutosDisplay(getPesquisa());
+        return produtos;
+    }
+
+    public List<Produto> retornaProdutosPorMemoriaRam() {
+        ProdutoDAO produtoDAO = new ProdutoDAO();
+        produtos = produtoDAO.retornaProdutosRam(getPesquisa());
+        return produtos;
+    }
+
+    public List<Produto> retornaProdutosPorMemoriaExpansiva() {
+        ProdutoDAO produtoDAO = new ProdutoDAO();   
+        produtos = produtoDAO.retornaProdutosMemoriaExpansiva(getPesquisa());
+        return produtos;
+    }
+
+    public List<Produto> getProdutoCategoria() {
+        return operacoesEJB.returnProdutosCategoria(getQuery());
+    }
+    
+    public List<Produto> getProdutoMarca() {
+        return operacoesEJB.returnProdutosMarca(getQuery());
+    }
+    
+    public List<Produto> getProdutoSistemaOperacional() {
+        return operacoesEJB.returnProdutosSistemaOperacional(getQuery());
+    }
+
     public String getBanda() {
         return banda;
     }
@@ -384,8 +480,6 @@ public class ProdutoBean implements Serializable {
     public void setCategoria(String categoria) {
         this.categoria = categoria;
     }
-    
-    
 
     public String getPesquisa() {
         return pesquisa;
@@ -394,7 +488,6 @@ public class ProdutoBean implements Serializable {
     public void setPesquisa(String pesquisa) {
         this.pesquisa = pesquisa;
     }
-   
 
     public Double getValorInicial() {
         return valorInicial;
@@ -419,8 +512,6 @@ public class ProdutoBean implements Serializable {
     public void setTipoPesquisa(String tipoPesquisa) {
         this.tipoPesquisa = tipoPesquisa;
     }
-    
-    
 
     private static Map<String, Object> pesquisaValue;
 
@@ -434,7 +525,7 @@ public class ProdutoBean implements Serializable {
         pesquisaValue.put("Memória RAM", "Memória RAM");
         pesquisaValue.put("Valor", "Valor");
     }
-    
+
     private static Map<String, Object> pesquisaValueCor;
 
     static {
@@ -447,7 +538,7 @@ public class ProdutoBean implements Serializable {
         pesquisaValueCor.put("Preto", "Preto");
         pesquisaValueCor.put("Rosa", "Rosa");
     }
-    
+
     private static Map<String, Object> pesquisaValueMemoriaInterna;
 
     static {
@@ -460,7 +551,7 @@ public class ProdutoBean implements Serializable {
         pesquisaValueMemoriaInterna.put("64GB", "64GB");
 
     }
-    
+
     private static Map<String, Object> pesquisaValueDisplay;
 
     static {
@@ -472,10 +563,10 @@ public class ProdutoBean implements Serializable {
         pesquisaValueDisplay.put("5.1", "5.1");
         pesquisaValueDisplay.put("5.5", "5.5");
         pesquisaValueDisplay.put("5.4", "5.4");
-        pesquisaValueDisplay.put("6", "6.0");   
+        pesquisaValueDisplay.put("6", "6.0");
 
     }
-    
+
     private static Map<String, Object> pesquisaValueRam;
 
     static {
@@ -492,7 +583,7 @@ public class ProdutoBean implements Serializable {
     public Map<String, Object> getPesquisaValueRam() {
         return pesquisaValueRam;
     }
-    
+
     private static Map<String, Object> pesquisaValueMemoriaExpansiva;
 
     static {
@@ -507,8 +598,6 @@ public class ProdutoBean implements Serializable {
     public Map<String, Object> getPesquisaValueMemoriaExpansiva() {
         return pesquisaValueMemoriaExpansiva;
     }
-    
-    
 
     public Map<String, Object> getPesquisaValueDisplay() {
         return pesquisaValueDisplay;
@@ -526,8 +615,6 @@ public class ProdutoBean implements Serializable {
         return pesquisaValue;
     }
 
-    
-    
     private List<Produto> produtos;
 
     public List<Produto> getProdutos() {
@@ -545,87 +632,5 @@ public class ProdutoBean implements Serializable {
     public void setOperacoesEJB(OperacoesEJB operacoesEJB) {
         this.operacoesEJB = operacoesEJB;
     }
-
-    @EJB
-    private OperacoesEJB operacoesEJB;
-
-    @ManagedProperty(value = "#{carrinhoBean}")
-    CarrinhoBean carrinho;
-
-    public CarrinhoBean getCarrinho() {
-        return carrinho;
-    }
-
-    public void setCarrinho(CarrinhoBean carrinho) {
-        this.carrinho = carrinho;
-    }
-
-    /**
-     * Creates a new instance of ProdutoBean
-     */
-    public ProdutoBean() {
-    }
-
-    public String getQuery() {
-        return FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("query");
-    }
-
-    public void checarExistenciaQuery() throws IOException {
-        if (operacoesEJB.checarExistenciaQuery(getQuery()) == 0) {
-            FacesContext.getCurrentInstance().getExternalContext().redirect("error.xhtml");
-        }
-    }
-
-    public Produto getProduto() {
-        return operacoesEJB.returnProduct(getQuery());
-    }
-
-    public void adicionarAoCarrinho() {
-        String query = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("query");
-        carrinho.add(operacoesEJB.returnProduct(query));
-    }
-
-    public List<Produto> retornaProdutosPorNome() {
-        ProdutoDAO produtoDAO = new ProdutoDAO();
-        produtos = produtoDAO.retornaProdutos(getPesquisa());
-        return produtos;
-    }
-
-    public List<Produto> retornaProdutosPorValor() {
-        ProdutoDAO produtoDAO = new ProdutoDAO();
-        produtos = produtoDAO.retornaProdutosValor(getValorInicial(), getValorFinal());
-        return produtos;
-    }
-
-    public List<Produto> retornaProdutosPorCor() {
-        ProdutoDAO produtoDAO = new ProdutoDAO();
-        produtos = produtoDAO.retornaProdutosCor(getPesquisa());
-        return produtos;
-    }
-
-    public List<Produto> retornaProdutosPorMemoria() {
-        ProdutoDAO produtoDAO = new ProdutoDAO();
-        produtos = produtoDAO.retornaProdutosMemoria(getPesquisa());
-        return produtos;
-    }
-
-    public List<Produto> retornaProdutosPorDisplay() {
-        ProdutoDAO produtoDAO = new ProdutoDAO();
-        produtos = produtoDAO.retornaProdutosDisplay(getPesquisa());
-        return produtos;
-    }
-
-    public List<Produto> retornaProdutosPorMemoriaRam() {
-        ProdutoDAO produtoDAO = new ProdutoDAO();
-        produtos = produtoDAO.retornaProdutosRam(getPesquisa());
-        return produtos;
-    }
-    
-    public List<Produto> retornaProdutosPorMemoriaExpansiva() {
-        ProdutoDAO produtoDAO = new ProdutoDAO();
-        produtos = produtoDAO.retornaProdutosMemoriaExpansiva(getPesquisa());
-        return produtos;
-    }
-    
 
 }

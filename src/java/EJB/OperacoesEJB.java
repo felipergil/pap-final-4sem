@@ -28,7 +28,7 @@ public class OperacoesEJB {
     }
     
     public List<Pedido> returnPedidos() {
-        return em.createQuery("SELECT p from Pedido p group by p.identificador order by p.datahora").getResultList();
+        return em.createQuery("SELECT p from Pedido p group by p.identificador order by p.datahora desc").getResultList();
     }
     
     public List<Produto> returnProdutosApple() {
@@ -49,18 +49,6 @@ public class OperacoesEJB {
     
     public List<Produto> returnProdutosMicrosoft() {
         return em.createNamedQuery("Produtos.Marca").setParameter("marcaAtribuida", "Microsoft").getResultList();
-    }
-    
-    public List<Produto> returnProdutosEntrada() {
-        return em.createNamedQuery("Produtos.Categoria").setParameter("categoriaAtribuida", "Entrada").getResultList();
-    }
-    
-    public List<Produto> returnProdutosIntermediario() {
-        return em.createNamedQuery("Produtos.Categoria").setParameter("categoriaAtribuida", "Intermediário").getResultList();
-    }
-    
-    public List<Produto> returnProdutosHighEnd() {
-        return em.createNamedQuery("Produtos.Categoria").setParameter("categoriaAtribuida", "High-end").getResultList();
     }
     
     public List<Produto> returnProdutosIOS() {
@@ -100,11 +88,46 @@ public class OperacoesEJB {
     }
     
     public List<Pedido> returnPedido(String query) {
-        List<Pedido> pedidos = (List<Pedido>) em.createQuery("SELECT p from Pedido p where p.identificador = :identificador").setParameter
-        ("identificador", query).getResultList();
+        List<Pedido> pedidos = (List<Pedido>) em.createQuery("SELECT p from Pedido p where p.identificador = :identificador")
+                .setParameter("identificador", query).getResultList();
         return pedidos;
     }
     
+    public int checarExistenciaQueryCategoria(String query) {
+        List<Produto> produtos = em.createQuery("SELECT p from Produto p where p.categoria = :categoria")
+                .setParameter("categoria", query).getResultList();
+        return produtos.size();
+    }
+    
+    public List<Produto> returnProdutosCategoria(String query) {
+        List<Produto> produtos = (List<Produto>) em.createQuery("SELECT p from Produto P where p.categoria = :categoria")
+                .setParameter("categoria", query).getResultList();
+        return produtos;
+    }
+    
+    public int checarExistenciaQueryMarca(String query) {
+        List<Produto> produtos = em.createQuery("SELECT p from Produto p where p.marca = :marca")
+                .setParameter("marca", query).getResultList();
+        return produtos.size();
+    }
+    
+    public List<Produto> returnProdutosMarca(String query) {
+        List<Produto> produtos = (List<Produto>) em.createQuery("SELECT p from Produto p where p.marca = :marca")
+                .setParameter("marca", query).getResultList();
+        return produtos;
+    }
+    
+    public int checarExistenciaQuerySistemaOperacional(String query) {
+        List<Produto> produtos = em.createQuery("SELECT p from Produto p where p.sistema = :sistema")
+                .setParameter("sistema", query).getResultList();
+        return produtos.size();
+    }
+    
+    public List<Produto> returnProdutosSistemaOperacional(String query) {
+        List<Produto> produtos = (List<Produto>) em.createQuery("SELECT p from Produto p where p.sistema = :sistema")
+                .setParameter("sistema", query).getResultList();
+        return produtos;
+    }
     
     
 }

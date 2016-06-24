@@ -2,14 +2,16 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
-    <ui:composition template="/WEB-INF/template/template.xhtml">
+    <ui:composition template="/WEB-INF/template/template.xhtml">   
         <ui:define name="content">
+            #{produtoBean.checarExistenciaQuery()}
 
             <div class="container">
 
-                <h:dataTable value="#{indiceBean.produtosMicrosoft}" var="p">
+                <h:dataTable value="#{produtoBean.produtoMarca}" var="p">
                     <h:column>
                         <div id="products" class="row list-group">
                             <div class="item  col-xs-4 col-lg-4 list-group-item">
@@ -41,6 +43,7 @@
                     </h:column>
                 </h:dataTable>
             </div>
+
         </ui:define>
     </ui:composition>
 </html>

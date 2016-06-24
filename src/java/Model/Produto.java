@@ -27,7 +27,6 @@ import javax.validation.constraints.Size;
 @NamedQueries({
     @NamedQuery(name = "Produto.findAll", query = "SELECT p FROM Produto p"),
     @NamedQuery(name = "Produtos.Marca", query = "SELECT p FROM Produto P where p.marca LIKE :marcaAtribuida"),
-    @NamedQuery(name = "Produtos.Categoria", query = "SELECT p FROM Produto P where p.categoria LIKE :categoriaAtribuida"),
     @NamedQuery(name = "Produtos.Sistema", query = "SELECT p FROM Produto P where p.sistema LIKE :sistemaAtribuido"),
     @NamedQuery(name = "Produtos.Titulo", query = "SELECT p FROM Produto P where p.titulo LIKE :tituloProduto"),
     @NamedQuery(name = "Produtos.Preco", query = "SELECT p FROM Produto P where p.valor >= :precoInicial AND " + "p.valor <= :precoFinal"),

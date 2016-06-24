@@ -26,7 +26,14 @@ public class ClienteDAO implements ClienteService {
     
     @Override
     public Cliente createOrUpdate(Cliente cliente) {
-        return entityManager.merge(cliente);
+        Cliente attached = entityManager.find(Cliente.class, cliente.getId());
+        if(attached == null) {
+            attached = new Cliente();
+            entityManager.persist(attached);
+        } else {
+            entityManager.merge(attached);
+        }
+        return attached;
     }
 
     @Override
@@ -52,5 +59,5 @@ public class ClienteDAO implements ClienteService {
         }
     }
 
-
+    
 }

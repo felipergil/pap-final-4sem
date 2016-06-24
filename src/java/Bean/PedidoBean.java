@@ -47,8 +47,4 @@ public class PedidoBean {
         return operacoesEJB.returnPedido(getQuery());
     }
     
-    
-    
-    
-    
 }

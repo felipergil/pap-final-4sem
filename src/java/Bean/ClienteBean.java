@@ -70,7 +70,6 @@ public class ClienteBean implements Serializable {
     public String login() {
         ClienteDAO clienteDAO = new ClienteDAO();
         Cliente cliente = clienteDAO.validarLogin(getEmail(), getSenha());
-        
         if(cliente == null) {
             FacesContext.getCurrentInstance().addMessage(
                                null,
@@ -80,6 +79,20 @@ public class ClienteBean implements Serializable {
         } else {
             Object b = new Object();
             SessionUtil.setParam("USUARIOLogado", b);
+            setBairro(cliente.getBairro());
+            setCelular(cliente.getCelular());
+            setCep(cliente.getCep());
+            setCidade(cliente.getCidade());
+            setCpf(cliente.getCpf());
+            setDatanascimento(cliente.getDatanascimento());
+            setEmail(cliente.getEmail());
+            setNome(cliente.getNome());
+            setNumeroendereco(cliente.getNumeroendereco());
+            setRua(cliente.getRua());
+            setSenha(cliente.getSenha());
+            setEstado(cliente.getEstado());
+            setTelefone(cliente.getTelefone());
+            setId(cliente.getId());
             return "/index.xhtml?faces-redirect=true";
         }
     } 

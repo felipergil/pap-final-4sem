@@ -30,29 +30,62 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Marcas <span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="celularesapple.xhtml">Apple</a></li>
-                                <li><a href="celularessamsung.xhtml">Samsung</a></li>
-                                <li><a href="celulareslg.xhtml">LG</a></li>
-                                <li><a href="celularesmotorola.xhtml">Motorola</a></li>
-                                <li><a href="celularesmicrosoft.xhtml">Microsoft</a></li>
+                                <li><h:outputLink value="celularesmarca.xhtml">
+                                                    <f:param name="query" value="Apple"/>
+                                                    <h:outputText value="Apple"/>
+                                                </h:outputLink></li>
+                                <li><h:outputLink value="celularesmarca.xhtml">
+                                                    <f:param name="query" value="Samsung"/>
+                                                    <h:outputText value="Samsung"/>
+                                                </h:outputLink></li>
+                                <li><h:outputLink value="celularesmarca.xhtml">
+                                                    <f:param name="query" value="LG"/>
+                                                    <h:outputText value="LG"/>
+                                                </h:outputLink></li>
+                                <li><h:outputLink value="celularesmarca.xhtml">
+                                                    <f:param name="query" value="Motorola"/>
+                                                    <h:outputText value="Motorola"/>
+                                                </h:outputLink></li>
+                                <li><h:outputLink value="celularesmarca.xhtml">
+                                                    <f:param name="query" value="Microsoft"/>
+                                                    <h:outputText value="Microsoft"/>
+                                                </h:outputLink></li>
                             </ul>
                         </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Categoria <span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
 
-                                <li><a href="celularesentrada.xhtml">Entrada</a></li>
-                                <li><a href="celularesintermediario.xhtml">Intermediário</a></li>
-                                <li><a href="celulareshighend.xhtml">High end</a></li>
+                                <li><h:outputLink value="celularescategoria.xhtml">
+                                                    <f:param name="query" value="Entrada"/>
+                                                    <h:outputText value="Entrada"/>
+                                                </h:outputLink></li>
+                                <li><li><h:outputLink value="celularescategoria.xhtml">
+                                                    <f:param name="query" value="Intermediário"/>
+                                                    <h:outputText value="Intermediário"/>
+                                                </h:outputLink></li></li>
+                                <li><li><h:outputLink value="celularescategoria.xhtml">
+                                                    <f:param name="query" value="High-end"/>
+                                                    <h:outputText value="High-end"/>
+                                                </h:outputLink></li></li>
                             </ul>
                         </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Sistema Operacional <span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
 
-                                <li><a href="celularesandroid.xhtml">Android</a></li>
-                                <li><a href="celularesios.xhtml">IOS</a></li>
-                                <li><a href="celulareswindows.xhtml">Windows Phone</a></li>
+                                <li><h:outputLink value="celularessistema.xhtml">
+                                                    <f:param name="query" value="Android"/>
+                                                    <h:outputText value="Android"/>
+                                                </h:outputLink></li>
+                                <li><h:outputLink value="celularessistema.xhtml">
+                                                    <f:param name="query" value="IOS"/>
+                                                    <h:outputText value="IOS"/>
+                                                </h:outputLink></li>
+                                <li><h:outputLink value="celularessistema.xhtml">
+                                                    <f:param name="query" value="Windows Phone"/>
+                                                    <h:outputText value="Windows"/>
+                                                </h:outputLink></li>
                             </ul>
                         </li>
                     </ul>

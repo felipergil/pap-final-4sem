@@ -42,49 +42,5 @@ public class IndiceBean implements Serializable {
     public List<Produto> getProdutos() {
         return operacoesEJB.returnProdutos();
     }
-    
-    public List<Produto> getProdutosApple() {
-        return operacoesEJB.returnProdutosApple();
-    }
-    
-    public List<Produto> getProdutosLG() {
-        return operacoesEJB.returnProdutosLG();
-    }
-    
-    public List<Produto> getProdutosSamsung() {
-        return operacoesEJB.returnProdutosSamsung();
-    }
-    
-    public List<Produto> getProdutosMotorola() {
-        return operacoesEJB.returnProdutosMotorola();
-    }
-    
-    public List<Produto> getProdutosMicrosoft() {
-        return operacoesEJB.returnProdutosMicrosoft();
-    }
-    
-    public List<Produto> getProdutosEntrada() {
-        return operacoesEJB.returnProdutosEntrada();
-    }
-    
-    public List<Produto> getProdutosIntermediario() {
-        return operacoesEJB.returnProdutosIntermediario();
-    }
-    
-    public List<Produto> getProdutosHighEnd() {
-        return operacoesEJB.returnProdutosHighEnd();
-    }
-    
-    public List<Produto> getProdutosIOS() {
-        return operacoesEJB.returnProdutosIOS();
-    }
-    
-    public List<Produto> getProdutosAndroid() {
-        return operacoesEJB.returnProdutosAndroid();
-    }
-    
-    public List<Produto> getProdutosWindows() {
-        return operacoesEJB.returnProdutosWindows();
-    }
    
 }
