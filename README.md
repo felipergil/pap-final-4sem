@@ -36,4 +36,6 @@ quantidade desejada. Obs.: Quando um produto desejado pelo cliente não estiver 
 
 # Descrição do Projeto
 Desenvolvemos o Projeto Ecommerce para a empresa LowPriceCell, empresa especializada na comercialização de celulares.
-API Utilizadas: JSF 2.2, JPA, EJB3, Java EE 7
+
+API Utilizadas: JSF 2.2, JPA EclipseLink , EJB3 e Java EE 7. 
+Front-end: Bootstrap.
