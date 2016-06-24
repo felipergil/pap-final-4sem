@@ -42,5 +42,6 @@ public class IndiceBean implements Serializable {
     public List<Produto> getProdutos() {
         return operacoesEJB.returnProdutos();
     }
+    
    
 }
