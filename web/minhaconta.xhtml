@@ -45,7 +45,7 @@
                                                         <td><h:outputText value="#{p.identificador}"></h:outputText></td>
                                                         <td><h:outputText value="#{p.datahora}"></h:outputText></td>
                                                         <td><h:outputText value="#{p.status}"></h:outputText></td>
-                                                        <td><h:outputText value="#{p.frete}"></h:outputText></td>
+                                                        <td><h:outputText value="R$ #{p.frete}"></h:outputText></td>
                                                         <td><h:outputText value="R$ #{p.valorcompra}"></h:outputText></td>
                                                         <td><h:link value="Ver produtos" outcome="/minhaconta" fragment="modalPedido">
                                                                 <f:param name="query" value="#{p.identificador}" />
