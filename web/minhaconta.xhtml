@@ -6,6 +6,9 @@
 
     <ui:composition template="/WEB-INF/template/template.xhtml">
         <ui:define name="content">
+            
+            
+            <h:inputHidden value="#{pedidoBean.puxarEmail()}"></h:inputHidden>
 
             <h:form>
                 <div class="container">
@@ -24,34 +27,34 @@
 
 
                                         <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Código Identificador</th>
-                            <th>Data</th>
-                            <th>Status</th>
-                            <th>Frete</th>
-                            <th>Valor Total</th>
-                            <th>Produtos</th>
-                        </tr>    
-                    </thead>
-                    <tbody>
-                        <ui:repeat value="#{pedidoBean.pedidos}" var="p">
+                                            <thead>
+                                                <tr>
+                                                    <th>Código Identificador</th>
+                                                    <th>Data</th>
+                                                    <th>Status</th>
+                                                    <th>Frete</th>
+                                                    <th>Valor Total</th>
+                                                    <th>Produtos</th>
+                                                </tr>    
+                                            </thead>
+                                            <tbody>
+                                                <ui:repeat value="#{pedidoBean.pedidoEmail}" var="p">
 
-                            <tr>
+                                                    <tr>
 
-                                <td><h:outputText value="#{p.identificador}"></h:outputText></td>
-                                <td><h:outputText value="#{p.datahora}"></h:outputText></td>
-                                <td><h:outputText value="#{p.status}"></h:outputText></td>
-                                <td><h:outputText value="#{p.frete}"></h:outputText></td>
-                                <td><h:outputText value="R$ #{p.valorcompra}"></h:outputText></td>
-                                <td><h:link value="Ver produtos" outcome="/minhaconta" fragment="modalPedido">
-                                        <f:param name="query" value="#{p.identificador}" />
-                                    </h:link></td>
-                            </tr>
+                                                        <td><h:outputText value="#{p.identificador}"></h:outputText></td>
+                                                        <td><h:outputText value="#{p.datahora}"></h:outputText></td>
+                                                        <td><h:outputText value="#{p.status}"></h:outputText></td>
+                                                        <td><h:outputText value="#{p.frete}"></h:outputText></td>
+                                                        <td><h:outputText value="R$ #{p.valorcompra}"></h:outputText></td>
+                                                        <td><h:link value="Ver produtos" outcome="/minhaconta" fragment="modalPedido">
+                                                                <f:param name="query" value="#{p.identificador}" />
+                                                            </h:link></td>
+                                                    </tr>
 
-                        </ui:repeat>
-                    </tbody>
-                </table>
+                                                </ui:repeat>
+                                            </tbody>
+                                        </table>
 
                                     </div>
 
@@ -157,62 +160,60 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="container">
 
-                <div class="modal fade" id="modalPedido" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span></button>
-                                <h4 class="modal-title" id="myModalLabel">Detalhe do pedido</h4>
-                            </div>
-                            <div class="modal-body">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th>Produto</th>
-                                            <th>Quantidade</th>
-                                            <th>Valor</th>
-                                        </tr>    
-                                    </thead>
-                                    <tbody>
-                                        <ui:repeat value="#{pedidoBean.pedido}" var="p">
+                    <div class="modal fade" id="modalPedido" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span></button>
+                                    <h4 class="modal-title" id="myModalLabel">Detalhe do pedido</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <table class="table">
+                                        <thead>
                                             <tr>
-                                                <td><h:outputText value="#{p.produto}"></h:outputText></td>
-                                                <td><h:outputText value="#{p.quantidade}"></h:outputText></td>
-                                                <td><h:outputText value="R$ #{p.valortotal}"></h:outputText></td>
-                                            </tr>
+                                                <th>Produto</th>
+                                                <th>Quantidade</th>
+                                                <th>Valor</th>
+                                            </tr>    
+                                        </thead>
+                                        <tbody>
+                                            <ui:repeat value="#{pedidoBean.pedido}" var="p">
+                                                <tr>
+                                                    <td><h:outputText value="#{p.produto}"></h:outputText></td>
+                                                    <td><h:outputText value="#{p.quantidade}"></h:outputText></td>
+                                                    <td><h:outputText value="R$ #{p.valortotal}"></h:outputText></td>
+                                                </tr>
 
-                                        </ui:repeat>
-                                    </tbody>
-                                </table>
+                                            </ui:repeat>
+                                        </tbody>
+                                    </table>
 
 
 
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                                </div>
                             </div>
                         </div>
                     </div>
+
+
                 </div>
 
+                <!--Script para permitir que o modal seja aberto através de uma URL-->
+                <script>
+                    $(document).ready(function () {
 
-            </div>
-                
-            <!--Script para permitir que o modal seja aberto através de uma URL-->
-            <script>
-                $(document).ready(function () {
+                        if (window.location.href.indexOf('#modalPedido') != -1) {
+                            $('#modalPedido').modal('show');
+                        }
 
-                    if (window.location.href.indexOf('#modalPedido') != -1) {
-                        $('#modalPedido').modal('show');
-                    }
-
-                });
-            </script>
-
-                
+                    });
+                </script>
 
             </h:form>
         </ui:define>

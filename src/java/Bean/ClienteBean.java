@@ -10,10 +10,12 @@ import EJB.ClienteService;
 import Model.Cliente;
 import Utilitarios.SessionUtil;
 import java.io.Serializable;
+import java.util.Map;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
@@ -149,6 +151,12 @@ public class ClienteBean implements Serializable {
     public String logout() {
         SessionUtil.invalidate();
         return "/index.xhtml?faces-redirect=true";
+    }
+    
+    public void salvarEmail() {
+        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+        Map<String, Object> sessionMap = externalContext.getSessionMap();
+        sessionMap.put("email", this.email); 
     }
     
     public Long getId() {

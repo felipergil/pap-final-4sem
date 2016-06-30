@@ -9,9 +9,11 @@ import EJB.OperacoesEJB;
 import Model.Pedido;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
 /**
@@ -25,16 +27,30 @@ public class PedidoBean {
     @EJB
     private OperacoesEJB operacoesEJB;
     
+    private String email;
+
+    public OperacoesEJB getOperacoesEJB() {
+        return operacoesEJB;
+    }
+
+    public void setOperacoesEJB(OperacoesEJB operacoesEJB) {
+        this.operacoesEJB = operacoesEJB;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    
     public PedidoBean(){
         
     }
     
     public String getQuery() {
         return FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("query");
-    }
-    
-    public String getModal() {
-        return FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("modal");
     }
     
     public void checkIfQueryExists() throws IOException {
@@ -52,7 +68,14 @@ public class PedidoBean {
     }
     
     public List<Pedido> getPedidoEmail() {
-        return operacoesEJB.returnPedidoPorEmail(getQuery());
+        return operacoesEJB.returnPedidoPorEmail(puxarEmail());
+    }
+    
+    public String puxarEmail() {
+        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+        Map<String, Object> sessionMap = externalContext.getSessionMap();
+        this.email = (String) sessionMap.get("email");
+        return email;
     }
     
 }
