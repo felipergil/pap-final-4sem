@@ -22,7 +22,6 @@ import javax.servlet.http.HttpSession;
 
 @WebFilter(servletNames = {"Faces Servlet"})
 public class ControleDeAcesso implements Filter {
-    CarrinhoBean carrinho = new CarrinhoBean();
     
 
     public void doFilter(ServletRequest request, ServletResponse response,
@@ -47,6 +46,12 @@ public class ControleDeAcesso implements Filter {
         
         }if(session.getAttribute("USUARIOLogado") != null && (req.getRequestURI().endsWith("/LowPriceCell/minhaconta.xhtml"))) {
             chain.doFilter(request, response);
+            
+        }if(session.getAttribute("USUARIOLogado") != null && (req.getRequestURI().endsWith("/LowPriceCell/minhaconta2.xhtml"))) {
+            chain.doFilter(request, response);
+        
+        }if(session.getAttribute("USUARIOLogado") != null && (req.getRequestURI().endsWith("/LowPriceCell/payment.xhtml"))) {
+            chain.doFilter(request, response);
         
             
         } else if ((session.getAttribute("USUARIOLogado") != null)
@@ -55,6 +60,7 @@ public class ControleDeAcesso implements Filter {
                 || (req.getRequestURI().endsWith("/LowPriceCell/celularessistema.xhtml"))
                 || (req.getRequestURI().endsWith("/LowPriceCell/detalheproduto.xhtml"))
                 || (req.getRequestURI().endsWith("/LowPriceCell/celularesmarca.xhtml"))
+                || (req.getRequestURI().endsWith("/LowPriceCell/celularescategoria.xhtml"))
                 || (req.getRequestURI().endsWith("/LowPriceCell/logar.xhtml"))                
                 || (req.getRequestURI().endsWith("/LowPriceCell/sobre.xhtml"))
                 || (req.getRequestURI().endsWith("/LowPriceCell/error.xhtml"))
@@ -62,7 +68,6 @@ public class ControleDeAcesso implements Filter {
                 || (req.getRequestURI().endsWith("/LowPriceCell/pagamentocartao.xhtml"))
                 || (req.getRequestURI().endsWith("/LowPriceCell/boleto.xhtml"))
                 || (req.getRequestURI().endsWith("/LowPriceCell/pesquisar.xhtml"))
-                || (req.getRequestURI().endsWith("/LowPriceCell/payment.xhtml"))
                 || (req.getRequestURI().endsWith("/LowPriceCell/"))               
                 || (req.getRequestURI().endsWith("/LowPriceCell/carrinho.xhtml"))
                 || (req.getRequestURI().endsWith("/LowPriceCell/cadastroproduto.xhtml"))

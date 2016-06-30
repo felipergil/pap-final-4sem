@@ -108,10 +108,17 @@ public class ProdutoBean implements Serializable {
     public Produto getProduto() {
         return operacoesEJB.returnProduct(getQuery());
     }
+    
+    public String irAoCarrinho() {
+        return "carrinho?faces-redirect=true";
+    }
 
-    public void adicionarAoCarrinho() {
+    public String adicionarAoCarrinho() {
+        irAoCarrinho();
         String query = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("query");
         carrinho.add(operacoesEJB.returnProduct(query));
+        return "carrinho?faces-redirect=true";
+        
     }
 
     public List<Produto> retornaProdutosPorNome() {
@@ -166,6 +173,10 @@ public class ProdutoBean implements Serializable {
     
     public List<Produto> getProdutoSistemaOperacional() {
         return operacoesEJB.returnProdutosSistemaOperacional(getQuery());
+    }
+    
+    public List<Produto> getListaProdutos() {
+        return operacoesEJB.returnProdutos();
     }
 
     public String getBanda() {

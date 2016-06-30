@@ -6,7 +6,6 @@
 package Model;
 
 import java.io.Serializable;
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,7 +23,8 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "pedido")
 @NamedQueries({
-    @NamedQuery(name = "Pedido.findAll", query = "SELECT p FROM Pedido p")})
+    @NamedQuery(name = "Pedido.findAll", query = "SELECT p FROM Pedido p"),
+    @NamedQuery(name = "Pedido.porEmail", query = "SELECT p from Pedido p where p.email = :email group by p.identificador order by p.datahora desc")})
 public class Pedido implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -53,10 +53,35 @@ public class Pedido implements Serializable {
     @Size(max = 30)
     @Column(name = "identificador")
     private String identificador;
+    @Size(max = 30)
+    @Column(name = "cliente_email")
+    private String email;
 
     public Pedido() {
     }
 
+    public Pedido(String datahora, Double valortotal, String produto, Integer quantidade, String status,
+            Double frete, Long id, Double valorcompra, String identificador, String email) {
+        this.datahora = datahora;
+        this.valortotal = valortotal;
+        this.produto = produto;
+        this.quantidade = quantidade;
+        this.status = status;
+        this.frete = frete;
+        this.id = id;
+        this.valorcompra = valorcompra;
+        this.identificador = identificador;
+        this.email = email;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    
     public Pedido(Long id) {
         this.id = id;
     }

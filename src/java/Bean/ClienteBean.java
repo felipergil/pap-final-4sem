@@ -66,6 +66,25 @@ public class ClienteBean implements Serializable {
         clienteService.createOrUpdate(cliente);
         return "/index.xhtml?faces-redirect=true";
     }
+     
+     public void atualizar() {
+        Cliente cliente = new Cliente();
+        cliente.setBairro(getBairro());
+        cliente.setCelular(getCelular());
+        cliente.setCep(getCep());
+        cliente.setCidade(getCidade());
+        cliente.setCpf(getCpf());
+        cliente.setDatanascimento(getDatanascimento());
+        cliente.setEmail(getEmail());
+        cliente.setEstado(getEstado());
+        cliente.setNome(getNome());
+        cliente.setNumeroendereco(getNumeroendereco());
+        cliente.setRua(getRua());
+        cliente.setSenha(getSenha());
+        cliente.setTelefone(getTelefone());
+        cliente.setId(getId());
+        clienteService.createOrUpdate(cliente);
+    }
 
     public String login() {
         ClienteDAO clienteDAO = new ClienteDAO();
@@ -95,7 +114,37 @@ public class ClienteBean implements Serializable {
             setId(cliente.getId());
             return "/index.xhtml?faces-redirect=true";
         }
-    } 
+    }
+    
+    public String loginCompra() {
+        ClienteDAO clienteDAO = new ClienteDAO();
+        Cliente cliente = clienteDAO.validarLogin(getEmail(), getSenha());
+        if(cliente == null) {
+            FacesContext.getCurrentInstance().addMessage(
+                               null,
+                               new FacesMessage(FacesMessage.SEVERITY_ERROR, "Email ou senha incorreto",
+                                           "Email ou senha incorreto"));
+            return null;
+        } else {
+            Object b = new Object();
+            SessionUtil.setParam("USUARIOLogado", b);
+            setBairro(cliente.getBairro());
+            setCelular(cliente.getCelular());
+            setCep(cliente.getCep());
+            setCidade(cliente.getCidade());
+            setCpf(cliente.getCpf());
+            setDatanascimento(cliente.getDatanascimento());
+            setEmail(cliente.getEmail());
+            setNome(cliente.getNome());
+            setNumeroendereco(cliente.getNumeroendereco());
+            setRua(cliente.getRua());
+            setSenha(cliente.getSenha());
+            setEstado(cliente.getEstado());
+            setTelefone(cliente.getTelefone());
+            setId(cliente.getId());
+            return "/endereco.xhtml?faces-redirect=true";
+        }
+    }
     
     public String logout() {
         SessionUtil.invalidate();

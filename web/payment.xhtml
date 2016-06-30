@@ -7,6 +7,8 @@
 
     <ui:composition template="/WEB-INF/template/template.xhtml">
         <ui:define name="content">
+            
+            #{carrinhoBean.verificarCompra()}
 
             <div class="container">
                 <form action="https://www.sandbox.paypal.com/cgi-bin/websrc" method="post">

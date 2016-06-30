@@ -35,7 +35,7 @@
                         </tr>    
                     </thead>
                     <tbody>
-                        <ui:repeat value="#{indiceBean.pedidos}" var="p">
+                        <ui:repeat value="#{pedidoBean.pedidos}" var="p">
 
                             <tr>
 
@@ -147,7 +147,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <div class="col-sm-offset-2 col-sm-08">                    
-                                                    <h:commandButton class="btn btn-primary btn-circle text-uppercase" type="submit" id="submit"  action="#{clienteBean.salvar()}" value="Salvar mudanças"/>
+                                                    <h:commandButton class="btn btn-primary btn-circle text-uppercase" type="submit" id="submit"  action="#{clienteBean.atualizar()}" value="Salvar mudanças"/>
                                                 </div>
                                             </div>            
                                         </h:form>

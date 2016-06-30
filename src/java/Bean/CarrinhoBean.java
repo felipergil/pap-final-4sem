@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
 import javax.ejb.EJB;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -27,6 +28,15 @@ public class CarrinhoBean implements Serializable {
     PedidoService pedidoService;
 
     List<Produto> produtos = new ArrayList<>();
+    public String email;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     /**
      * Creates a new instance of CarrinhoBean
@@ -72,16 +82,27 @@ public class CarrinhoBean implements Serializable {
         return soma;
     }
 
-    public String Payment() {
+    public String payment() {
+        salvarPedido();
         return "payment";
     }
 
-    public String FinalizarCompra() {
+    public String finalizarCompra() {
         return "finalizarcompra?faces-redirect=true";
     }
+    
+    public String endereco() {
+        return "endereco?faces-redirect=true";
+    }
 
-    public String PagamentoBoleto() {
+    public String pagamentoBoleto() {
         return "boleto?faces-redirect=true";
+    }
+    
+    public void verificarCompra() {
+        if(getCarrinhoTamanho() == 0) {
+            endereco();
+        }
     }
 
     /*Gero um código identificador para quando houver um pedido com vários produtos 
@@ -105,10 +126,13 @@ public class CarrinhoBean implements Serializable {
             pedido.setValortotal(entry.getKey().getValor() * entry.getValue());
             pedido.setValorcompra(somarValorTotal());
             pedido.setIdentificador(identificador);
+            pedido.setEmail(getEmail());
             pedidoService.addPedido(pedido);
         }
         produtos.removeAll(produtos);
         
     }
+    
+    
    
 }

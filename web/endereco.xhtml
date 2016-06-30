@@ -1,16 +1,28 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <ui:composition template="/WEB-INF/template/template.xhtml">
         <ui:define name="content">
+
+            <script type="text/javascript">
+                function setHiddenValue(new_value) {
+
+                    document.getElementById('myForm:email').value = new_value;
+
+                }
+            </script>
 
             <div class="container">
 
                 <div class="row">
                     <div class="col-md-4 col-md-offset-4">
-                        <h:form class="form-horizontal" role="form">
+                        <h:form class="form-horizontal" role="form" id="myForm">
+
+                            <h:inputHidden id="email" value="#{carrinhoBean.email}" />
+
                             <fieldset>
 
                                 <!-- Form Name -->
@@ -68,7 +80,7 @@
                                 <div class="form-group">
                                     <div class="col-sm-offset-2 col-sm-10">
                                         <div class="pull-right">
-                                            <h:commandButton type="submit" class="btn btn-primary" value="Confirmar" action="#{clienteBean.atualizarCliente()}"></h:commandButton>
+                                            <h:commandButton type="submit" class="btn btn-primary" value="Confirmar" action="#{carrinhoBean.payment()}" onclick="setHiddenValue('#{clienteBean.email}');"></h:commandButton>
                                         </div>
                                     </div>
                                 </div>

@@ -7,9 +7,6 @@
 
     <ui:composition>
 
-
-
-
         <nav class="navbar navbar-default">
             <div class="container-fluid">
 
@@ -31,25 +28,25 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Marcas <span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
                                 <li><h:outputLink value="celularesmarca.xhtml">
-                                                    <f:param name="query" value="Apple"/>
-                                                    <h:outputText value="Apple"/>
-                                                </h:outputLink></li>
+                                        <f:param name="query" value="Apple"/>
+                                        <h:outputText value="Apple"/>
+                                    </h:outputLink></li>
                                 <li><h:outputLink value="celularesmarca.xhtml">
-                                                    <f:param name="query" value="Samsung"/>
-                                                    <h:outputText value="Samsung"/>
-                                                </h:outputLink></li>
+                                        <f:param name="query" value="Samsung"/>
+                                        <h:outputText value="Samsung"/>
+                                    </h:outputLink></li>
                                 <li><h:outputLink value="celularesmarca.xhtml">
-                                                    <f:param name="query" value="LG"/>
-                                                    <h:outputText value="LG"/>
-                                                </h:outputLink></li>
+                                        <f:param name="query" value="LG"/>
+                                        <h:outputText value="LG"/>
+                                    </h:outputLink></li>
                                 <li><h:outputLink value="celularesmarca.xhtml">
-                                                    <f:param name="query" value="Motorola"/>
-                                                    <h:outputText value="Motorola"/>
-                                                </h:outputLink></li>
+                                        <f:param name="query" value="Motorola"/>
+                                        <h:outputText value="Motorola"/>
+                                    </h:outputLink></li>
                                 <li><h:outputLink value="celularesmarca.xhtml">
-                                                    <f:param name="query" value="Microsoft"/>
-                                                    <h:outputText value="Microsoft"/>
-                                                </h:outputLink></li>
+                                        <f:param name="query" value="Microsoft"/>
+                                        <h:outputText value="Microsoft"/>
+                                    </h:outputLink></li>
                             </ul>
                         </li>
                         <li class="dropdown">
@@ -57,17 +54,17 @@
                             <ul class="dropdown-menu" role="menu">
 
                                 <li><h:outputLink value="celularescategoria.xhtml">
-                                                    <f:param name="query" value="Entrada"/>
-                                                    <h:outputText value="Entrada"/>
-                                                </h:outputLink></li>
+                                        <f:param name="query" value="Entrada"/>
+                                        <h:outputText value="Entrada"/>
+                                    </h:outputLink></li>
                                 <li><li><h:outputLink value="celularescategoria.xhtml">
-                                                    <f:param name="query" value="Intermediário"/>
-                                                    <h:outputText value="Intermediário"/>
-                                                </h:outputLink></li></li>
+                                            <f:param name="query" value="Intermediário"/>
+                                            <h:outputText value="Intermediário"/>
+                                        </h:outputLink></li></li>
                                 <li><li><h:outputLink value="celularescategoria.xhtml">
-                                                    <f:param name="query" value="High-end"/>
-                                                    <h:outputText value="High-end"/>
-                                                </h:outputLink></li></li>
+                                            <f:param name="query" value="High-end"/>
+                                            <h:outputText value="High-end"/>
+                                        </h:outputLink></li></li>
                             </ul>
                         </li>
                         <li class="dropdown">
@@ -75,17 +72,17 @@
                             <ul class="dropdown-menu" role="menu">
 
                                 <li><h:outputLink value="celularessistema.xhtml">
-                                                    <f:param name="query" value="Android"/>
-                                                    <h:outputText value="Android"/>
-                                                </h:outputLink></li>
+                                        <f:param name="query" value="Android"/>
+                                        <h:outputText value="Android"/>
+                                    </h:outputLink></li>
                                 <li><h:outputLink value="celularessistema.xhtml">
-                                                    <f:param name="query" value="IOS"/>
-                                                    <h:outputText value="IOS"/>
-                                                </h:outputLink></li>
+                                        <f:param name="query" value="IOS"/>
+                                        <h:outputText value="IOS"/>
+                                    </h:outputLink></li>
                                 <li><h:outputLink value="celularessistema.xhtml">
-                                                    <f:param name="query" value="Windows Phone"/>
-                                                    <h:outputText value="Windows"/>
-                                                </h:outputLink></li>
+                                        <f:param name="query" value="Windows"/>
+                                        <h:outputText value="Windows Phone"/>
+                                    </h:outputLink></li>
                             </ul>
                         </li>
                     </ul>
@@ -135,7 +132,7 @@
                             </h:form>
                             <h:form rendered="#{clienteBean.login() != null}" acceptcharset="UTF-8">
                                 <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">#{clienteBean.email} <span class="caret"></span></a>
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">#{clienteBean.nome} <span class="caret"></span></a>
                                     <ul class="dropdown-menu" role="menu">
                                         <li><a href="minhaconta.xhtml">Minha conta</a></li>
                                         <li><a href="#">Meus Pedidos</a></li>
@@ -159,7 +156,24 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <span class="glyphicon glyphicon-shopping-cart"></span> <h:outputText id="cartSize" value="#{carrinhoBean.carrinhoTamanho} - iten(s)"/><span class="caret"></span></a>                             
                             <ul class="dropdown-menu dropdown-cart" role="menu">                                  
                                 <li>
-                                    <li><a class="text-center" href="carrinho.xhtml">Ver Carrinho</a></li>
+                                    <ui:repeat value="#{carrinhoBean.itensCarrinho.entrySet().toArray()}" var="p">
+                                    <span class="item">
+                                        <span class="item-left">
+                                            <img src="http://lorempixel.com/50/50/" alt="" />
+                                            <span class="item-info">
+                                                <span>#{p.key.titulo}</span>
+                                                <span>R$ #{p.key.valor}</span>
+                                            </span>
+                                        </span>
+                                        <span class="item-right">
+                                            <h:form>
+                                                <h:commandButton  value="x" action="#{carrinhoBean.remove(p.key)}" class="btn btn-danger"/>
+                                            </h:form>
+                                            
+                                        </span>
+                                    </span>
+                                    </ui:repeat>
+                                    <li><a class="text-center" href="carrinho.xhtml">Ir para o Carrinho</a></li>
                                 </li>                               
                             </ul>
                         </li> 

@@ -8,7 +8,16 @@
 
     <ui:composition template="/WEB-INF/template/template.xhtml">   
         <ui:define name="content">
-            <h:form>
+            <h:form rendered="#{carrinhoBean.carrinhoTamanho == 0}">
+                <div class="jumbotron">
+                    <div class="container">
+                        Algo está errado! Você não possui nenhum item no carrinho, adicione algum produto no carrinho antes de 
+                        acessar esta página.
+                    </div>
+                </div>
+            </h:form>
+            
+            <h:form rendered="#{carrinhoBean.carrinhoTamanho != 0}">
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-12 col-md-10 col-md-offset-1">
@@ -85,14 +94,16 @@
                                         <td>   </td>
                                         <td>   </td>
                                         <td>
-                                            <button type="button" class="btn btn-default" href="index.html">
+                                            <button type="button" class="btn btn-default" href="index.xhtml">
                                                 <span class="glyphicon glyphicon-shopping-cart"></span> Continuar comprando
                                             </button></td>
                                         <td>
 
-                                            <h:commandButton action="#{carrinhoBean.salvarPedido()}"  value="Finalizar compra">
+                                            <h:commandButton rendered="#{clienteBean.login() != null}" action="#{carrinhoBean.endereco()}"  value="Finalizar compra" class="btn btn-success"/>
+                                            <h:commandButton rendered="#{clienteBean.login() == null}" action="#{carrinhoBean.finalizarCompra()}"  value="Finalizar compra" class="btn btn-success"/>
+                                            
 
-                                            </h:commandButton>
+                                            
 
                                         </td>
 

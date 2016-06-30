@@ -20,28 +20,20 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class ClienteDAO implements ClienteService {
-    
-    @PersistenceContext(unitName="LowPriceCellPU")
+
+    @PersistenceContext(unitName = "LowPriceCellPU")
     private EntityManager entityManager;
-    
+
     @Override
     public Cliente createOrUpdate(Cliente cliente) {
-        Cliente attached = entityManager.find(Cliente.class, cliente.getId());
-        if(attached == null) {
-            attached = new Cliente();
-            entityManager.persist(attached);
-        } else {
-            entityManager.merge(attached);
-        }
-        return attached;
+        return entityManager.merge(cliente);
     }
 
     @Override
     public void remove(Cliente cliente) {
         entityManager.remove(entityManager.merge(cliente));
     }
-    
-    
+
     public EntityManager getEM() {
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("LowPriceCellPU");
         return factory.createEntityManager();
@@ -50,7 +42,8 @@ public class ClienteDAO implements ClienteService {
     public Cliente validarLogin(String email, String senha) {
         EntityManager em = getEM();
         try {
-            Cliente cliente = (Cliente) em.createQuery("SELECT c FROM Cliente c where c.email = :email and c.senha = :senha").setParameter("email", email)
+            Cliente cliente = (Cliente) em.createQuery("SELECT c FROM Cliente c where c.email = :email "
+                    + "and c.senha = :senha").setParameter("email", email)
                     .setParameter("senha", senha).getSingleResult();
             return cliente;
 
@@ -59,5 +52,4 @@ public class ClienteDAO implements ClienteService {
         }
     }
 
-    
 }
