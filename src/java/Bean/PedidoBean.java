@@ -44,7 +44,7 @@ public class PedidoBean {
     }
     
     public List<Pedido> getPedido() {
-        return operacoesEJB.returnPedido(getModal());
+        return operacoesEJB.returnPedido(getQuery());
     }
     
     public List<Pedido> getPedidos() {
