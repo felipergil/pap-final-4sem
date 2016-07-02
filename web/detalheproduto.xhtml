@@ -48,7 +48,9 @@
                                 <div class="product-desc">#{produtoBean.produto.miniDescricao}</div>
 
                                 <hr>
-                                    <div class="product-price">R$ #{produtoBean.produto.valor}</div>
+                                    <div class="product-price"><h:outputText value="#{produtoBean.produto.valor}">
+                                            <f:convertNumber currencyCode="BRL" type="currency" />
+                                        </h:outputText></div>
                                     <div class="product-stock">Em estoque</div>
                                 </hr>
 

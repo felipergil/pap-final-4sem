@@ -16,7 +16,7 @@
                     </div>
                 </div>
             </h:form>
-            
+
             <h:form rendered="#{carrinhoBean.carrinhoTamanho != 0}">
                 <div class="container">
                     <div class="row">
@@ -48,8 +48,14 @@
                                                 <h:outputText id="exampleInputEmail1" value="#{p.value}"/>
 
                                             </td>
-                                            <td class="col-sm-1 col-md-1 text-center"><strong>R$ #{p.key.valor}</strong></td>
-                                            <td class="col-sm-1 col-md-1 text-center"><strong><h:outputText rendered="#{p.value == 1}" value="R$ #{p.key.valor}"/> <h:outputText rendered="#{p.value > 1}" value="R$ #{p.key.valor * p.value}"/></strong></td>
+                                            <td class="col-sm-1 col-md-1 text-center"><strong><h:outputText value="#{p.key.valor}">
+                                                        <f:convertNumber currencyCode="BRL" type="currency" />
+                                                    </h:outputText></strong></td>
+                                            <td class="col-sm-1 col-md-1 text-center"><strong><h:outputText rendered="#{p.value == 1}" value="#{p.key.valor}">
+                                                        <f:convertNumber currencyCode="BRL" type="currency" />
+                                                    </h:outputText> <h:outputText rendered="#{p.value > 1}" value="#{p.key.valor * p.value}">
+                                                        <f:convertNumber currencyCode="BRL" type="currency" />
+                                                    </h:outputText></strong></td>
 
                                             <td class="col-sm-1 col-md-1">
 
@@ -73,7 +79,9 @@
                                         <td>   </td>
                                         <td>   </td>
                                         <td><h5>Subtotal</h5></td>
-                                        <td class="text-right"><h5><strong>R$ #{carrinhoBean.somarValorTotal()}</strong></h5></td>
+                                        <td class="text-right"><h5><strong><h:outputText value="#{carrinhoBean.somarValorTotal()}">
+                                                        <f:convertNumber currencyCode="BRL" type="currency" />
+                                                    </h:outputText> </strong></h5></td>
                                     </tr>
                                     <tr>
                                         <td>   </td>
@@ -81,16 +89,20 @@
                                         <td>   </td>
                                         <td><h5>Frete <br/> <h:message for="cepDestino" style="color:red"/></h5></td>
                                         <td><h5><strong><h:inputText id="cepDestino" pt:placeholder="Digite o CEP" class="form-control" value="#{carrinhoBean.cepDestino}" validatorMessage="Utilize apenas números ex: 09320680">
-                                                    <f:validateRegex pattern="[0-9]+" />
-                                                    <f:validateLength for="valorFrete" minimum="8" maximum="8"/></h:inputText> <h:commandButton class="btn btn-default" value="Calcular" action="#{carrinhoBean.calcularPrecoEPrazo()}"/> <br/><br/> <h:outputText rendered="#{carrinhoBean.valorFrete >= 0}" id="valorFrete" value="Valor: R$ #{carrinhoBean.valorFrete}"/> <br/> <h:outputText rendered="#{carrinhoBean.prazoFrete >= 0}" value="Prazo: #{carrinhoBean.prazoFrete} - Dias"/></strong></h5></td>
-                                            <td><h5><strong></strong></h5></td>    
+                                                        <f:validateRegex pattern="[0-9]+" />
+                                                        <f:validateLength for="valorFrete" minimum="8" maximum="8"/></h:inputText> <h:commandButton class="btn btn-default" value="Calcular" action="#{carrinhoBean.calcularPrecoEPrazo()}"/> <br/><br/> <h:outputText rendered="#{carrinhoBean.valorFrete >= 0}" id="valorFrete" value="#{carrinhoBean.valorFrete}">
+                                                        <f:convertNumber currencyCode="BRL" type="currency" />
+                                                    </h:outputText> <br/> <h:outputText rendered="#{carrinhoBean.prazoFrete >= 0}" value="Prazo: #{carrinhoBean.prazoFrete} - Dias"/></strong></h5></td>
+                                        <td><h5><strong></strong></h5></td>    
                                     </tr>
                                     <tr>
                                         <td>   </td>
                                         <td>   </td>
                                         <td>   </td>
                                         <td><h3>Total</h3></td>
-                                        <td class="text-right"><h3><strong>R$ #{carrinhoBean.somarValorTotal() + carrinhoBean.valorFrete} </strong></h3></td>
+                                        <td class="text-right"><h3><strong><h:outputText value="#{carrinhoBean.somarValorTotal() + carrinhoBean.valorFrete}">
+                                                        <f:convertNumber currencyCode="BRL" type="currency" />
+                                                    </h:outputText> </strong></h3></td>
                                     </tr>
                                     <tr>
                                         <td>   </td>
@@ -104,9 +116,9 @@
 
                                             <h:commandButton rendered="#{clienteBean.login() != null}" action="#{carrinhoBean.endereco()}"  value="Finalizar compra" class="btn btn-success"/>
                                             <h:commandButton rendered="#{clienteBean.login() == null}" action="#{carrinhoBean.finalizarCompra()}"  value="Finalizar compra" class="btn btn-success"/>
-                                            
 
-                                            
+
+
 
                                         </td>
 

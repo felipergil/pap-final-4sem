@@ -10,6 +10,9 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import Model.Produto;
 import java.math.BigDecimal;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
@@ -38,8 +41,10 @@ public class CarrinhoBean implements Serializable {
     private String email;
     private String cepDestino;
     private Double valorFrete;
-    private String prazoFrete;
-
+    private String prazoFrete;   
+    DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+    private final Date datahora = new Date();
+    
     public String getPrazoFrete() {
         return prazoFrete;
     }
@@ -132,6 +137,12 @@ public class CarrinhoBean implements Serializable {
     public String pagamentoBoleto() {
         return "boleto?faces-redirect=true";
     }
+    
+    public void verificarCompra() {
+        if(getCarrinhoTamanho() == 0) {
+            endereco();
+        }
+    }
 
     /*Gero um código identificador para quando houver um pedido com vários produtos 
       conseguir identificar de qual pedido ele pertence
@@ -162,7 +173,7 @@ public class CarrinhoBean implements Serializable {
         String identificador = gerarIdentificador();
         for (Map.Entry<Produto, Integer> entry : map.entrySet()) {
             Pedido pedido = new Pedido();
-            pedido.setDatahora("30/06/16");
+            pedido.setDatahora(datahora);
             pedido.setFrete(getValorFrete());
             pedido.setProduto(entry.getKey().getTitulo());
             pedido.setQuantidade(entry.getValue());

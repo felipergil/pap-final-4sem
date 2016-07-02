@@ -6,6 +6,7 @@
 package Model;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,6 +15,8 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 
 /**
@@ -28,9 +31,9 @@ import javax.validation.constraints.Size;
 public class Pedido implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Size(max = 15)
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "datahora")
-    private String datahora;
+    private Date datahora;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "valortotal")
     private Double valortotal;
@@ -60,7 +63,7 @@ public class Pedido implements Serializable {
     public Pedido() {
     }
 
-    public Pedido(String datahora, Double valortotal, String produto, Integer quantidade, String status,
+    public Pedido(Date datahora, Double valortotal, String produto, Integer quantidade, String status,
             Double frete, Long id, Double valorcompra, String identificador, String email) {
         this.datahora = datahora;
         this.valortotal = valortotal;
@@ -86,11 +89,11 @@ public class Pedido implements Serializable {
         this.id = id;
     }
 
-    public String getDatahora() {
+    public Date getDatahora() {
         return datahora;
     }
 
-    public void setDatahora(String datahora) {
+    public void setDatahora(Date datahora) {
         this.datahora = datahora;
     }
 
