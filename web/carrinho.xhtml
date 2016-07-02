@@ -82,8 +82,8 @@
                                         <td><h5>Frete <br/> <h:message for="cepDestino" style="color:red"/></h5></td>
                                         <td><h5><strong><h:inputText id="cepDestino" pt:placeholder="Digite o CEP" class="form-control" value="#{carrinhoBean.cepDestino}" validatorMessage="Utilize apenas números ex: 09320680">
                                                     <f:validateRegex pattern="[0-9]+" />
-                                            <f:validateLength for="valorFrete" minimum="8" maximum="8"/></h:inputText> <h:commandButton class="btn btn-default" value="Calcular" action="#{carrinhoBean.calcularFrete()}"/> <h:outputText id="valorFrete" value=" R$ #{carrinhoBean.valorFrete}"/></strong></h5></td>
-                                            
+                                                    <f:validateLength for="valorFrete" minimum="8" maximum="8"/></h:inputText> <h:commandButton class="btn btn-default" value="Calcular" action="#{carrinhoBean.calcularPrecoEPrazo()}"/> <br/><br/> <h:outputText rendered="#{carrinhoBean.valorFrete >= 0}" id="valorFrete" value="Valor: R$ #{carrinhoBean.valorFrete}"/> <br/> <h:outputText rendered="#{carrinhoBean.prazoFrete >= 0}" value="Prazo: #{carrinhoBean.prazoFrete} - Dias"/></strong></h5></td>
+                                            <td><h5><strong></strong></h5></td>    
                                     </tr>
                                     <tr>
                                         <td>   </td>
